@@ -2,14 +2,14 @@
 
 **Human connection, simplified.**
 
-> Version: 1.0.0-mvp  
-> Status: MVP Complete - Testing Phase
+> Version: 1.0.0-beta  
+> Status: v1 Core - 85% Complete
 
-Nexa is a mobile-first app that helps people form meaningful connections based on location and user-controlled factors like interests, intent, and availability. It uses a Flutter frontend and a Django REST backend.
+Nexa is a mobile-first app that helps people **meet people near them**, safely and intentionally. It uses a Flutter frontend and a Django REST backend.
 
 ## Vision
 
-Open your phone and see the right people around you, on your terms. Nexa focuses on friendship, collaboration, community building, and dating - letting users define their intent.
+Open your phone and see the right people around you, on your terms. Nexa focuses on intentional connections — friendship, dating, networking, and activity partners — with user-controlled matching and cultural awareness.
 
 ## Tech Stack
 
@@ -22,41 +22,79 @@ Open your phone and see the right people around you, on your terms. Nexa focuses
 | State Mgmt  | Riverpod                            |
 | Navigation  | GoRouter                            |
 
-## Features
+---
 
-### ✅ Implemented (MVP)
+## Nexa v1 Features (Core Product)
 
-- **Authentication**
-  - Email/password registration with verification
-  - JWT token-based authentication
-  - Secure token storage
+### ✅ Implemented
 
-- **User Profiles**
-  - Photo upload with ordering
-  - Display name, bio, pronouns
-  - Age bucket, faith preferences
-  - Intent tags (Friendship, Dating, Networking, etc.)
-  - Interest tags (Music, Sports, Travel, etc.)
+**Account & Identity**
+- Email/password registration with verification
+- JWT token-based authentication
+- Profile: Name, photos (1-3), age bucket, bio, pronouns
 
-- **Discovery**
-  - Swipeable card interface
-  - Filter by intent, interests, age, faith
-  - Pass/Connect actions
+**Intent Selection**
+- Friendship, Dating, Networking, Activity Partner
+- Visible on profile, filterable in discovery
 
-- **Connections**
-  - Send connection requests
-  - Accept/reject incoming requests
-  - View sent/received/accepted connections
+**Faith & Values (Ghana-Aware)**
+- Optional: Christian, Muslim, Traditional, Other, Prefer not to say
+- Visibility control (hidden by default)
+- Can be used as private filter
 
-- **Chat**
-  - 1:1 messaging between connected users
-  - Message threads list
-  - Real-time message display
+**Discovery**
+- Swipeable card interface
+- Distance-based sorting
+- Filter by intent, interests, age, faith
+- Pass/Connect actions
 
-- **Safety**
-  - Block users
-  - Report users with reason categories
-  - View and unblock blocked users
+**Connections (Consent-First)**
+- Send connection requests
+- Mutual acceptance required
+- View sent/received/accepted connections
+
+**1-to-1 Chat**
+- Text messaging between connections
+- Read receipts
+- Message threads
+
+**Safety & Trust**
+- Block users
+- Report users (7 categories including religious harassment)
+- Blocked users management
+
+### 🔴 In Progress (v1 Gaps)
+
+| Feature | Priority | Status |
+|---------|----------|--------|
+| Location radius control (1km/3km/5km/10km) | High | Not built |
+| Pause visibility | High | Backend ready, UI needed |
+| Delete account | High | Not built |
+| Phone signup + OTP | Medium | Not built |
+| Gender field | Medium | Not built |
+| Dedicated filter UI | Medium | Not built |
+| Password reset UI | Medium | Backend ready |
+
+### ❌ NOT in v1
+
+- Group events
+- Feeds/Stories
+- Public posts
+- Payments
+- AI matching
+
+---
+
+## Nexa v1.5 Features (Future)
+
+> **After v1 is stable**: Help users do things with people they already trust.
+
+- **Activities/Plans**: Home hangouts, football matches, study groups
+- **Activity Creation**: Title, date, location, max people, filters
+- **Join Flow**: Request → Host approval → Location shared
+- **Activity Safety**: Max limits, leave anytime, report
+
+---
 
 ## Getting Started
 
@@ -64,7 +102,7 @@ Open your phone and see the right people around you, on your terms. Nexa focuses
 
 - Python 3.11+
 - Flutter 3.29+
-- Android Studio / Xcode (for mobile development)
+- Android Studio / Xcode
 
 ### Backend Setup
 
@@ -76,7 +114,7 @@ venv\Scripts\activate  # Windows
 
 pip install -r requirements.txt
 python manage.py migrate
-python manage.py seed_tags  # Seed intent/interest tags
+python manage.py seed_tags
 python manage.py runserver 0.0.0.0:8000
 ```
 
@@ -88,21 +126,24 @@ flutter pub get
 flutter run
 ```
 
-### Testing on Physical Device
+### Physical Device Testing
 
 ```bash
-# Enable ADB port forwarding for API access
+# Enable ADB port forwarding
 adb reverse tcp:8000 tcp:8000
 
-# Run on connected device
+# Run on device
 flutter run -d <device_id>
 ```
+
+---
 
 ## Project Structure
 
 ```
 Nexa/
 ├── README.md
+├── IMPLEMENTATION_STATUS.md    # Detailed feature tracking
 ├── docs/
 │   ├── product-spec.md
 │   ├── technical-spec.md
@@ -126,6 +167,8 @@ Nexa/
     │   └── widgets/       # Reusable components
     └── pubspec.yaml
 ```
+
+---
 
 ## API Endpoints
 
@@ -156,29 +199,35 @@ Nexa/
 - `POST /api/v1/connections/{id}/block/` - Block user
 - `POST /api/v1/reports/` - Report user
 
-## Environment Configuration
-
-### Frontend (lib/config/app_config.dart)
-```dart
-static const String baseUrl = 'http://localhost:8000/api/v1';
-```
-
-### Backend (config/settings.py)
-```python
-ALLOWED_HOSTS = ['*']  # Configure for production
-CORS_ALLOW_ALL_ORIGINS = True  # Configure for production
-```
+---
 
 ## Roadmap
 
-- [x] MVP Features
-- [ ] Real-time chat with WebSockets
+### v1 (Current)
+- [x] Email authentication
+- [x] User profiles with photos
+- [x] Intent & interest tags
+- [x] Discovery with filtering
+- [x] Connection requests
+- [x] 1-to-1 chat
+- [x] Block & report
+- [ ] Location radius control
+- [ ] Pause/delete account
+- [ ] Phone signup
+
+### v1.5 (Future)
+- [ ] Activities/Plans system
+- [ ] Activity creation & filters
+- [ ] Join flow with approval
+- [ ] Activity safety features
+
+### v2 (Future)
+- [ ] Real-time chat (WebSocket)
 - [ ] Push notifications
+- [ ] Circles (recurring groups)
 - [ ] Profile verification
-- [ ] Advanced matching algorithm
-- [ ] Group activities/events
-- [ ] iOS App Store release
-- [ ] Android Play Store release
+
+---
 
 ## Contributing
 
@@ -187,6 +236,8 @@ CORS_ALLOW_ALL_ORIGINS = True  # Configure for production
 3. Commit changes (`git commit -m 'Add amazing feature'`)
 4. Push to branch (`git push origin feature/amazing-feature`)
 5. Open a Pull Request
+
+---
 
 ## License
 

@@ -1,543 +1,324 @@
-# Nexa Implementation Status Report
+# Nexa Implementation Status
 
 **Date**: December 30, 2025  
 **Project**: Nexa - Human Connection App  
-**Version**: MVP
+**Tagline**: Human connection, simplified.
 
 ---
 
 ## Executive Summary
 
-✅ **Backend**: 100% Complete (45 passing tests)  
-✅ **Frontend**: 95% Complete (All features implemented)  
-⏳ **Remaining**: Polish & Testing (5%)
+| Version | Status | Completion |
+|---------|--------|------------|
+| **v1 (Core)** | In Progress | 85% |
+| **v1.5 (Activities)** | Not Started | 0% |
 
 ---
 
-## Detailed Status vs. Implementation Plan
+## Nexa v1 — Core Product (Launch Version)
 
-### Phase 0: Project Setup ✅ **100% COMPLETE**
-
-| Task | Plan Status | Actual Status |
-|------|-------------|---------------|
-| **Backend** |
-| Django project structure | ✅ Required | ✅ Complete - 6 apps |
-| PostgreSQL/SQLite setup | ✅ Required | ✅ Complete - Both supported |
-| Django REST Framework | ✅ Required | ✅ Complete |
-| JWT auth setup | ✅ Required | ✅ Complete - simplejwt |
-| User model | ✅ Required | ✅ Complete - Email-based |
-| Environment variables | ✅ Required | ✅ Complete - .env |
-| Health check endpoint | ✅ Required | ✅ Complete |
-| **Frontend** |
-| Flutter project | ✅ Required | ✅ Complete |
-| Folder structure | ✅ Required | ✅ Complete - screens/models/services/providers |
-| State management | ✅ Required | ✅ Complete - Riverpod |
-| Routing | ✅ Required | ✅ Complete - go_router |
-| ApiClient service | ✅ Required | ✅ Complete - dio with interceptors |
-| Secure token storage | ✅ Required | ✅ Complete - flutter_secure_storage |
-| Theme | ✅ Required | ✅ Complete - Material 3 |
-| **DevOps** |
-| Git repository | ✅ Required | ✅ Complete |
-| .gitignore | ✅ Required | ✅ Complete |
+> **Goal**: Help users **meet people near them**, safely and intentionally (1-to-1).
 
 ---
 
-### Phase 1: Auth & Profiles ✅ **100% COMPLETE**
+### 1. Account & Identity
 
-| Feature | Plan Status | Backend | Frontend | Notes |
-|---------|-------------|---------|----------|-------|
-| **Authentication** |
-| Registration | ✅ Required | ✅ Complete | ✅ Complete | Email + password |
-| Email verification | ✅ Required | ✅ Complete | ✅ Complete | Code-based verification |
-| Login | ✅ Required | ✅ Complete | ✅ Complete | JWT tokens |
-| Token refresh | ✅ Required | ✅ Complete | ✅ Complete | Auto-refresh interceptor |
-| Logout | ✅ Required | ✅ Complete | ✅ Complete | Token blacklist |
-| Password reset | ✅ Required | ✅ Complete | ❌ Not implemented | Backend ready, UI not built |
-| **Screens** |
-| Splash screen | ✅ Required | N/A | ✅ Complete | Auto-login check |
-| Login screen | ✅ Required | N/A | ✅ Complete | Validation, error handling |
-| Register screen | ✅ Required | N/A | ✅ Complete | Validation, error handling |
-| Email verification | ✅ Required | N/A | ✅ Complete | Info screen with resend |
-| **Profiles** |
-| Profile model | ✅ Required | ✅ Complete | ✅ Complete | All fields implemented |
-| Get/Update profile | ✅ Required | ✅ Complete | ✅ Complete | Full CRUD |
-| Photo upload | ✅ Required | ✅ Complete | ✅ Complete | 1-3 photos, multipart |
-| Photo delete | ✅ Required | ✅ Complete | ✅ Complete | Individual deletion |
-| Interest tags | ✅ Required | ✅ Complete | ✅ Complete | Seeded data |
-| Intent tags | ✅ Required | ✅ Complete | ✅ Complete | Seeded data |
-| Profile edit screen | ✅ Required | N/A | ✅ Complete | All fields editable |
-| Profile view screen | ✅ Required | N/A | ✅ Complete | In home screen |
+| Feature | Required | Backend | Frontend | Notes |
+|---------|----------|---------|----------|-------|
+| Email signup | ✅ | ✅ Complete | ✅ Complete | Email + password |
+| Phone signup + OTP | ✅ | ❌ Not built | ❌ Not built | **v1 Gap** |
+| Email verification | ✅ | ✅ Complete | ✅ Complete | Code-based |
+| Login/Logout | ✅ | ✅ Complete | ✅ Complete | JWT tokens |
+| Token refresh | ✅ | ✅ Complete | ✅ Complete | Auto-refresh |
+| Password reset | ✅ | ✅ Complete | ❌ Not built | Backend ready |
+| Profile: Name | ✅ | ✅ Complete | ✅ Complete | Display name |
+| Profile: Photos | ✅ | ✅ Complete | ✅ Complete | 1-3 photos |
+| Profile: Age | ✅ | ✅ Complete | ✅ Complete | Age buckets |
+| Profile: Gender | ✅ | ❌ Not built | ❌ Not built | **v1 Gap** - Optional visibility |
+| Profile: City/Area | ✅ | ⚠️ Partial | ⚠️ Partial | Has hometown, needs area |
 
-**Implementation Quality**:
-- ✅ All required fields from spec implemented
-- ✅ Faith & values with visibility toggle
-- ✅ Age buckets instead of exact age
-- ✅ Pronouns field
-- ✅ Photo management (add/delete/reorder)
-- ❌ Password reset UI not built (backend exists)
+**Status**: 80% Complete
 
 ---
 
-### Phase 2: Preferences & Discovery ✅ **100% COMPLETE**
+### 2. Intent Selection
 
-| Feature | Plan Status | Backend | Frontend | Notes |
-|---------|-------------|---------|----------|-------|
-| **Preferences** |
-| Location preference model | ✅ Required | ✅ Complete | ✅ Complete | City + radius |
-| Matching preference model | ✅ Required | ✅ Complete | ✅ Complete | All filters |
-| Get/Update preferences | ✅ Required | ✅ Complete | ✅ Complete | Full API |
-| Preferences screen | ✅ Required | N/A | ❌ Not built | Managed in profile edit |
-| **Discovery** |
-| Discovery endpoint | ✅ Required | ✅ Complete | ✅ Complete | Filtered, paginated |
-| Distance calculation | ✅ Required | ✅ Complete | ✅ Complete | Haversine formula |
-| Relevance scoring | ✅ Required | ✅ Complete | ✅ Complete | Multi-factor |
-| Discovery screen | ✅ Required | N/A | ✅ Complete | Tinder-style swipe |
-| Card UI | ✅ Required | N/A | ✅ Complete | 3-card stack |
-| Profile detail view | ✅ Required | N/A | ✅ Complete | Full profile shown |
-| Location permissions | ✅ Required | N/A | ✅ Complete | geolocator |
-| Pagination | ✅ Required | ✅ Complete | ✅ Complete | Infinite scroll |
-| Pull-to-refresh | ✅ Required | N/A | ✅ Complete | All lists |
+| Feature | Required | Backend | Frontend | Notes |
+|---------|----------|---------|----------|-------|
+| Friendship intent | ✅ | ✅ Complete | ✅ Complete | |
+| Dating intent | ✅ | ✅ Complete | ✅ Complete | |
+| Networking intent | ✅ | ✅ Complete | ✅ Complete | |
+| Activity partner intent | ✅ | ✅ Complete | ✅ Complete | |
+| Open to connections | ✅ | ❌ Not built | ❌ Not built | Need to add |
+| Intent visible on profile | ✅ | ✅ Complete | ✅ Complete | |
+| Intent filterable | ✅ | ✅ Complete | ✅ Complete | |
 
-**Implementation Quality**:
-- ✅ Swipe gestures (drag to like/pass)
-- ✅ Visual overlays (❤️ / ✕)
-- ✅ Action buttons as alternative
-- ✅ Card rotation & opacity animations
-- ✅ Match celebration dialog
-- ✅ Auto-pagination (<5 cards)
-- ✅ Distance, bio, tags displayed
-- ⚠️ Dedicated preferences screen not built (functionality in profile edit)
+**Status**: 85% Complete
 
 ---
 
-### Phase 3: Connections ✅ **100% COMPLETE**
+### 3. Location & Radius Control
 
-| Feature | Plan Status | Backend | Frontend | Notes |
-|---------|-------------|---------|----------|-------|
-| Connection model | ✅ Required | ✅ Complete | ✅ Complete | Status tracking |
-| List connections | ✅ Required | ✅ Complete | ✅ Complete | Filtered by status |
-| Send request | ✅ Required | ✅ Complete | ✅ Complete | From discovery |
-| Accept/Reject | ✅ Required | ✅ Complete | ✅ Complete | Optimistic UI |
-| Block functionality | ✅ Required | ✅ Complete | ✅ Complete | Full integration |
-| Connections screen | ✅ Required | N/A | ✅ Complete | 3-tab interface |
-| Connection status | ✅ Required | ✅ Complete | ✅ Complete | In discovery cards |
-| Prevent duplicates | ✅ Required | ✅ Complete | ✅ Complete | Backend validation |
-| Pull-to-refresh | ✅ Required | N/A | ✅ Complete | All tabs |
+| Feature | Required | Backend | Frontend | Notes |
+|---------|----------|---------|----------|-------|
+| Auto-detect location | ✅ | ✅ Complete | ✅ Complete | GPS via geolocator |
+| User-defined radius | ✅ | ⚠️ Partial | ❌ Not built | **v1 Gap** - Need 1km/3km/5km/10km selector |
+| Distance as ranges | ✅ | ⚠️ Shows exact | ⚠️ Shows exact | **v1 Gap** - Should show "~2km" not "2.3km" |
+| Pause visibility | ✅ | ✅ Complete | ❌ Not built | **v1 Gap** - Backend has is_visible field |
+| Distance calculation | ✅ | ✅ Complete | ✅ Complete | Haversine formula |
 
-**Implementation Quality**:
-- ✅ Three tabs: Received / Sent / Matches
-- ✅ Badge counts on tabs
-- ✅ Accept/reject buttons on received
-- ✅ Message button on matches → Chat
-- ✅ Pull-to-refresh per tab
-- ✅ Empty states
-- ✅ Photo caching
-- ✅ Blocked users hidden from all views
+**Status**: 60% Complete
 
 ---
 
-### Phase 4: Chat ✅ **100% COMPLETE**
+### 4. Faith & Values (Optional, Ghana-Aware)
 
-| Feature | Plan Status | Backend | Frontend | Notes |
-|---------|-------------|---------|----------|-------|
-| ChatThread model | ✅ Required | ✅ Complete | ✅ Complete | User pairs |
-| ChatMessage model | ✅ Required | ✅ Complete | ✅ Complete | With read tracking |
-| Auto-create thread | ✅ Required | ✅ Complete | ✅ Complete | On connection accept |
-| List threads | ✅ Required | ✅ Complete | ✅ Complete | With previews |
-| Get messages | ✅ Required | ✅ Complete | ✅ Complete | Paginated |
-| Send message | ✅ Required | ✅ Complete | ✅ Complete | Optimistic send |
-| Mark as read | ✅ Required | ✅ Complete | ✅ Complete | Auto on view |
-| Chat list screen | ✅ Required | N/A | ✅ Complete | Thread list |
-| Chat detail screen | ✅ Required | N/A | ✅ Complete | Messages view |
-| Unread indicators | ✅ Required | ✅ Complete | ✅ Complete | Badges |
-| Message bubbles | ✅ Required | N/A | ✅ Complete | Sent/received styles |
-| Scroll handling | ✅ Required | N/A | ✅ Complete | Auto-scroll, load more |
-| WebSocket (real-time) | 🔮 Future | ❌ Not built | ❌ Not built | MVP uses polling |
+| Feature | Required | Backend | Frontend | Notes |
+|---------|----------|---------|----------|-------|
+| Faith field | ✅ Optional | ✅ Complete | ✅ Complete | Christian/Muslim/Traditional/Other/Prefer not to say |
+| Visibility control | ✅ | ✅ Complete | ✅ Complete | Hidden by default option |
+| Private filter | ✅ | ✅ Complete | ⚠️ Partial | Can filter, UI needs work |
 
-**Implementation Quality**:
-- ✅ Thread list with last message
-- ✅ Unread badges on threads
-- ✅ Relative timestamps (timeago)
-- ✅ Message bubbles (purple/gray)
-- ✅ Read receipts (double check)
-- ✅ Date separators
-- ✅ Auto-scroll to latest
-- ✅ Load older messages on scroll
-- ✅ Pull-to-refresh
-- ✅ Empty states
-- ❌ Real-time updates (future enhancement)
-- ❌ Typing indicators (future)
+**Status**: 90% Complete
 
 ---
 
-### Phase 5: Safety & Polish ✅ **BACKEND 100%, FRONTEND 95%**
+### 5. Discovery (People Near Me)
 
-| Feature | Plan Status | Backend | Frontend | Notes |
-|---------|-------------|---------|----------|-------|
-| **Safety** |
-| Report model | ✅ Required | ✅ Complete | ✅ Complete | With reason tracking |
-| Report endpoint | ✅ Required | ✅ Complete | ✅ Complete | Full implementation |
-| Block functionality | ✅ Required | ✅ Complete | ✅ Complete | Comprehensive |
-| Blocked user handling | ✅ Required | ✅ Complete | ✅ Complete | Hidden everywhere |
-| Report button | ✅ Required | N/A | ✅ Complete | All interaction points |
-| Block button | ✅ Required | N/A | ✅ Complete | All interaction points |
-| Reason picker | ✅ Required | N/A | ✅ Complete | 7 categories |
-| Confirmation dialogs | ✅ Required | N/A | ✅ Complete | Block consequences |
-| Blocked users screen | ✅ Required | N/A | ✅ Complete | With unblock |
-| Settings screen | ✅ Required | N/A | ✅ Complete | Safety section |
-| Django Admin | ✅ Required | ✅ Complete | N/A | Full moderation tools |
-| Rate limiting | ✅ Required | ✅ Complete | N/A | On sensitive endpoints |
-| Security hardening | ✅ Required | ✅ Complete | N/A | CORS, HTTPS ready |
-| **Polish** |
-| Loading states | ✅ Required | N/A | ✅ Complete | All screens |
-| Error messages | ✅ Required | N/A | ⚠️ Basic | Generic messages |
-| Empty states | ✅ Required | N/A | ✅ Complete | All lists |
-| Pull-to-refresh | ✅ Required | N/A | ✅ Complete | All lists |
-| Accessibility | ✅ Required | N/A | ⚠️ Minimal | Basic support |
-| Loading skeletons | 🔮 Nice-to-have | N/A | ❌ Not built | Future polish |
-| Animations | 🔮 Nice-to-have | N/A | ⚠️ Basic | Card swipe only |
+| Feature | Required | Backend | Frontend | Notes |
+|---------|----------|---------|----------|-------|
+| Discovery endpoint | ✅ | ✅ Complete | ✅ Complete | Filtered, paginated |
+| List-based view | ✅ | N/A | ❌ Not built | **v1 Gap** - Currently swipe cards |
+| Sort by distance | ✅ | ✅ Complete | ✅ Complete | |
+| Sort by shared intent | ✅ | ✅ Complete | ✅ Complete | |
+| Sort by shared interests | ✅ | ✅ Complete | ✅ Complete | |
+| Show: Name | ✅ | ✅ Complete | ✅ Complete | |
+| Show: Intent icons | ✅ | ✅ Complete | ⚠️ Text only | Should be icons |
+| Show: Distance range | ✅ | ⚠️ Shows exact | ⚠️ Shows exact | Should be ranges |
+| Show: 2-3 interest tags | ✅ | ✅ Complete | ✅ Complete | |
+| Pagination | ✅ | ✅ Complete | ✅ Complete | |
 
-**Implementation Quality - Safety**:
-- ✅ Report dialog with 7 categories
-- ✅ Block confirmation with consequences
-- ✅ Blocked users management screen
-- ✅ Unblock functionality
-- ✅ 3-dot menu pattern (Discovery/Connections/Chat)
-- ✅ Consistent UI across all screens
-- ✅ Settings screen structure
-- ✅ Django admin for moderation
-
-**Implementation Quality - Polish**:
-- ✅ Loading indicators on all screens
-- ⚠️ Generic error messages (not user-friendly)
-- ✅ Empty states with helpful text
-- ✅ Pull-to-refresh everywhere
-- ⚠️ Minimal accessibility labels
-- ❌ No loading skeletons (shimmer effect)
-- ⚠️ Limited animations beyond swipe
+**Status**: 70% Complete (UI pattern differs from spec)
 
 ---
 
-### Phase 6: Testing & Launch Prep ⏳ **IN PROGRESS**
+### 6. Filters (User-Controlled)
 
-| Task | Plan Status | Status | Notes |
-|------|-------------|--------|-------|
-| **Backend Testing** |
-| Unit tests | ✅ Required | ✅ Complete | 45 passing tests |
-| API integration tests | ✅ Required | ✅ Complete | Included in 45 |
-| Test coverage docs | ✅ Required | ✅ Complete | TEST_SUMMARY.md |
-| **Frontend Testing** |
-| Widget tests | ✅ Required | ❌ Not started | Critical components |
-| Integration tests | ✅ Required | ❌ Not started | User flows |
-| E2E tests | ✅ Required | ❌ Not started | Key scenarios |
-| **Launch Prep** |
-| Production environment | ✅ Required | ❌ Not started | Cloud deployment |
-| PostgreSQL setup | ✅ Required | ❌ Not started | Managed database |
-| File storage | ✅ Required | ❌ Not started | S3 or similar |
-| HTTPS config | ✅ Required | ❌ Not started | SSL certificates |
-| Release build | ✅ Required | ❌ Not started | APK/App Bundle |
-| Play Store listing | ✅ Required | ❌ Not started | Metadata, screenshots |
-| Privacy policy | ✅ Required | ❌ Not started | URL needed |
-| TestFlight (iOS) | 🔮 Optional | ❌ Not started | Future |
+| Feature | Required | Backend | Frontend | Notes |
+|---------|----------|---------|----------|-------|
+| Distance filter | ✅ | ✅ Complete | ❌ Not built | **v1 Gap** - Need UI |
+| Intent filter | ✅ | ✅ Complete | ⚠️ Partial | In preferences |
+| Age range filter | ✅ | ✅ Complete | ⚠️ Partial | In preferences |
+| Interests filter | ✅ | ✅ Complete | ⚠️ Partial | In preferences |
+| Faith filter | ✅ Optional | ✅ Complete | ⚠️ Partial | In preferences |
+| No black-box algorithm | ✅ | ✅ Complete | ✅ Complete | Transparent filtering |
+
+**Status**: 70% Complete (need dedicated filter UI)
 
 ---
 
-## Product Spec Compliance
+### 7. Connection Requests (Consent-First)
 
-### Core Features Checklist
+| Feature | Required | Backend | Frontend | Notes |
+|---------|----------|---------|----------|-------|
+| "Connect" button | ✅ | ✅ Complete | ✅ Complete | |
+| Optional intro message | ✅ | ❌ Not built | ❌ Not built | **v1 Gap** |
+| Mutual acceptance | ✅ | ✅ Complete | ✅ Complete | |
+| Pending states | ✅ | ✅ Complete | ✅ Complete | |
+| Accept/Decline | ✅ | ✅ Complete | ✅ Complete | |
+| Connections list | ✅ | ✅ Complete | ✅ Complete | 3-tab interface |
 
-| Feature | Spec Requirement | Implementation Status |
-|---------|------------------|----------------------|
-| **Onboarding & Auth** |
-| Email + password signup | ✅ Required | ✅ Complete |
-| Email verification | ✅ Required | ✅ Complete |
-| Login/logout | ✅ Required | ✅ Complete |
-| Password reset | ✅ Required | ⚠️ Backend only |
-| Token-based sessions | ✅ Required | ✅ Complete |
-| **Profile** |
-| Display name | ✅ Required | ✅ Complete |
-| Short bio | ✅ Required | ✅ Complete |
-| Pronouns | ✅ Required | ✅ Complete |
-| Age buckets | ✅ Required | ✅ Complete |
-| Languages | ✅ Required | ✅ Complete |
-| Interest tags | ✅ Required | ✅ Complete |
-| Intent tags | ✅ Required | ✅ Complete |
-| Faith & values | ✅ Required | ✅ Complete |
-| Faith visibility toggle | ✅ Required | ✅ Complete |
-| 1-3 photos | ✅ Required | ✅ Complete |
-| **Preferences** |
-| Location (city/GPS) | ✅ Required | ✅ Complete |
-| Radius (5-50km) | ✅ Required | ✅ Complete |
-| Location precision | ✅ Required | ✅ Complete |
-| Intent selection | ✅ Required | ✅ Complete |
-| Interest selection | ✅ Required | ✅ Complete |
-| Age bucket filter | ✅ Required | ✅ Complete |
-| Availability windows | ✅ Required | ✅ Complete |
-| Faith filter | ✅ Required | ✅ Complete |
-| Visibility toggle | ✅ Required | ✅ Complete |
-| **Discovery** |
-| Nearby users feed | ✅ Required | ✅ Complete |
-| Distance-based | ✅ Required | ✅ Complete |
-| Filter by preferences | ✅ Required | ✅ Complete |
-| Relevance sorting | ✅ Required | ✅ Complete |
-| Card UI | ✅ Required | ✅ Complete |
-| Pagination | ✅ Required | ✅ Complete |
-| **Connections** |
-| Send request | ✅ Required | ✅ Complete |
-| Pending states | ✅ Required | ✅ Complete |
-| Accept/decline | ✅ Required | ✅ Complete |
-| Connections list | ✅ Required | ✅ Complete |
-| **Chat** |
-| 1-to-1 threads | ✅ Required | ✅ Complete |
-| Message list | ✅ Required | ✅ Complete |
-| Timestamps | ✅ Required | ✅ Complete |
-| Read receipts | ✅ Required | ✅ Complete |
-| Unread counts | ✅ Required | ✅ Complete |
-| **Safety** |
-| Block users | ✅ Required | ✅ Complete |
-| Report users | ✅ Required | ✅ Complete |
-| Report reasons | ✅ Required | ✅ Complete |
-| Admin moderation | ✅ Required | ✅ Complete |
+**Status**: 90% Complete
 
 ---
 
-## Gap Analysis
+### 8. 1-to-1 Chat (Minimal)
 
-### Missing from Implementation Plan
+| Feature | Required | Backend | Frontend | Notes |
+|---------|----------|---------|----------|-------|
+| Text-only messaging | ✅ | ✅ Complete | ✅ Complete | |
+| Message threads | ✅ | ✅ Complete | ✅ Complete | |
+| Read receipts | ✅ Optional | ✅ Complete | ✅ Complete | |
+| Block from chat | ✅ | ✅ Complete | ✅ Complete | |
+| Report from chat | ✅ | ✅ Complete | ✅ Complete | |
 
-#### ❌ Password Reset UI
-- **Planned**: Yes (Phase 1)
-- **Backend**: ✅ Complete
-- **Frontend**: ❌ Not built
-- **Impact**: Medium - Users can't reset forgotten passwords
-- **Effort**: 1-2 hours (1 screen + flow)
-
-#### ❌ Dedicated Preferences Screen
-- **Planned**: Yes (Phase 2)
-- **Current**: Preferences managed in profile edit
-- **Impact**: Low - Functionality exists, just not separated
-- **Effort**: 2-3 hours (extract to new screen)
-
-#### ❌ Frontend Testing
-- **Planned**: Yes (Phase 6)
-- **Status**: Not started
-- **Impact**: High - No automated quality assurance
-- **Effort**: 1-2 weeks
-
-#### ❌ Loading Skeletons
-- **Planned**: Nice-to-have
-- **Status**: Using basic loading indicators
-- **Impact**: Low - UX polish
-- **Effort**: 3-5 hours
-
-#### ❌ Enhanced Error Messages
-- **Planned**: Yes
-- **Status**: Generic messages
-- **Impact**: Medium - Poor user experience on errors
-- **Effort**: 1-2 days (review all error states)
-
-#### ❌ Accessibility
-- **Planned**: Yes
-- **Status**: Minimal support
-- **Impact**: Medium - Excludes users with disabilities
-- **Effort**: 3-5 days (labels, semantics, testing)
-
-#### ❌ Animations/Transitions
-- **Planned**: Nice-to-have
-- **Status**: Basic (swipe animation only)
-- **Impact**: Low - UX polish
-- **Effort**: 2-3 days
-
-#### ❌ Real-Time Chat (WebSocket)
-- **Planned**: Future (noted in plan)
-- **Status**: Not implemented
-- **Impact**: Medium - Users must refresh to see messages
-- **Effort**: 1-2 weeks (Django Channels + Flutter WebSocket)
+**Status**: 100% Complete
 
 ---
 
-## Features Beyond Original Plan
+### 9. Safety & Trust
 
-### ✅ Implemented Extras
+| Feature | Required | Backend | Frontend | Notes |
+|---------|----------|---------|----------|-------|
+| Block users | ✅ | ✅ Complete | ✅ Complete | |
+| Report users | ✅ | ✅ Complete | ✅ Complete | 7 reason categories |
+| Religious harassment report | ✅ | ✅ Complete | ✅ Complete | Included in reasons |
+| Pause account | ✅ | ✅ Complete | ❌ Not built | **v1 Gap** - is_visible toggle |
+| Delete account | ✅ | ❌ Not built | ❌ Not built | **v1 Gap** |
+| Blocked users list | ✅ | ✅ Complete | ✅ Complete | With unblock |
+| Admin moderation | ✅ | ✅ Complete | N/A | Django admin |
 
-1. **Match Celebration Dialog**
-   - Not in original spec
-   - Shows when mutual like occurs
-   - Direct navigation to chat
-   - Enhances UX
-
-2. **Comprehensive Safety UI**
-   - Plan had basic requirements
-   - Implemented: 3-dot menu everywhere, blocked users screen, settings structure
-   - Exceeds original spec
-
-3. **Optimistic UI Updates**
-   - Not explicitly planned
-   - Implemented throughout (like/pass, send message, accept connection)
-   - Better perceived performance
-
-4. **Auto-Pagination**
-   - Plan mentioned pagination
-   - Implemented: Auto-load when <5 items
-   - Seamless infinite scroll
-
-5. **Badge Counts**
-   - Not in original spec
-   - Implemented: Unread messages, pending connections
-   - Better information architecture
-
-6. **Pull-to-Refresh**
-   - Mentioned in Phase 5 polish
-   - Implemented: All list screens
-   - Standard mobile UX pattern
+**Status**: 80% Complete
 
 ---
 
-## Summary Statistics
+## v1 Completion Summary
 
-### Development Completion
+| Category | Completion | Priority Gaps |
+|----------|------------|---------------|
+| Account & Identity | 80% | Phone signup, Gender field |
+| Intent Selection | 85% | "Open to connections" option |
+| Location & Radius | 60% | Radius selector, Pause visibility UI |
+| Faith & Values | 90% | Minor UI polish |
+| Discovery | 70% | List view (currently swipe cards) |
+| Filters | 70% | Dedicated filter UI |
+| Connections | 90% | Optional intro message |
+| Chat | 100% | ✅ Complete |
+| Safety | 80% | Pause/Delete account UI |
+| **Overall v1** | **85%** | |
 
-| Phase | Completion | Notes |
-|-------|-----------|-------|
-| Phase 0: Setup | 100% | ✅ Complete |
-| Phase 1: Auth & Profiles | 98% | ⚠️ Password reset UI missing |
-| Phase 2: Preferences & Discovery | 100% | ✅ Complete (preferences in profile) |
-| Phase 3: Connections | 100% | ✅ Complete |
-| Phase 4: Chat | 100% | ✅ Complete (polling, not WebSocket) |
-| Phase 5: Safety & Polish | 90% | ⚠️ Polish items remaining |
-| Phase 6: Testing & Launch | 15% | ⚠️ Only backend tests done |
-| **Overall MVP** | **95%** | **Feature-complete, needs polish & testing** |
+---
 
-### Code Metrics
+## ❌ Explicitly NOT in v1 (Confirmed)
+
+- ❌ Group events
+- ❌ Feeds
+- ❌ Stories
+- ❌ Public posts
+- ❌ Payments
+- ❌ AI matching
+- ❌ Activities/Plans (v1.5)
+
+---
+
+## v1 Priority Gap List
+
+### High Priority (Must Have for Launch)
+
+| Gap | Effort | Impact |
+|-----|--------|--------|
+| Location radius selector (1km/3km/5km/10km) | 4-6 hours | High - Core feature |
+| Pause visibility toggle | 2-3 hours | High - Privacy control |
+| Delete account | 4-6 hours | High - GDPR/User rights |
+| Distance shown as ranges | 2-3 hours | Medium - Privacy |
+
+### Medium Priority (Should Have)
+
+| Gap | Effort | Impact |
+|-----|--------|--------|
+| Phone signup + OTP | 1-2 days | Medium - Alternative auth |
+| Gender field with visibility | 3-4 hours | Medium - Profile completeness |
+| Filter UI on discovery | 4-6 hours | Medium - UX improvement |
+| Optional intro message | 3-4 hours | Medium - Better connections |
+| Password reset UI | 2-3 hours | Medium - User recovery |
+
+### Low Priority (Nice to Have)
+
+| Gap | Effort | Impact |
+|-----|--------|--------|
+| List-based discovery view | 1-2 days | Low - Current swipe works |
+| Intent icons (vs text) | 2-3 hours | Low - Visual polish |
+| "Open to connections" intent | 1-2 hours | Low - Extra option |
+
+---
+
+## Nexa v1.5 — Extension (Future)
+
+> **Goal**: Help users **do things with people they already trust** (small, local, optional).
+
+### Status: Not Started (0%)
+
+| Feature | Backend | Frontend | Notes |
+|---------|---------|----------|-------|
+| Activity model | ❌ | ❌ | Title, type, date, location, max people |
+| Activity creation | ❌ | ❌ | Host sets filters |
+| Activity discovery | ❌ | ❌ | Nearby activities |
+| Join request flow | ❌ | ❌ | Request → Approve → Join |
+| Activity chat | ❌ | ❌ | Group messaging |
+| Activity safety | ❌ | ❌ | Leave, report, limits |
+
+**v1.5 will be built AFTER v1 is stable and launched.**
+
+---
+
+## Technical Metrics
+
+### Backend (Django)
 
 | Metric | Count |
 |--------|-------|
-| Backend Apps | 6 |
-| Backend Tests | 45 (all passing) |
-| Frontend Screens | 11 |
-| Frontend Services | 6 |
-| Frontend Providers | 5 |
-| Frontend Models | 6 |
-| Frontend Widgets | 2 (reusable) |
-| Total Dart Files | 30+ |
-| Total Python Files | 45+ |
+| Apps | 6 (accounts, profiles, connections, chat, moderation, matching) |
+| Models | 12 |
+| API Endpoints | 25+ |
+| Tests | 45 (all passing) |
 
-### Feature Implementation
+### Frontend (Flutter)
 
-| Category | Planned | Implemented | Percentage |
-|----------|---------|-------------|------------|
-| Authentication | 6 features | 5 features | 83% |
-| Profile | 15 features | 15 features | 100% |
-| Preferences | 10 features | 10 features | 100% |
-| Discovery | 8 features | 8 features | 100% |
-| Connections | 7 features | 7 features | 100% |
-| Chat | 8 features | 7 features | 88% |
-| Safety | 6 features | 6 features | 100% |
-| Polish | 8 features | 4 features | 50% |
-| **Total** | **68 features** | **62 features** | **91%** |
+| Metric | Count |
+|--------|-------|
+| Screens | 11 |
+| Services | 6 |
+| Providers | 5 |
+| Models | 6 |
+| Widgets | 2 (reusable) |
 
 ---
 
-## Recommendations
+## Recommended v1 Launch Roadmap
 
-### Immediate Actions (Before Launch)
+### Week 1: Critical Gaps
+- [ ] Location radius selector UI
+- [ ] Pause visibility toggle UI
+- [ ] Delete account functionality
+- [ ] Distance shown as ranges
 
-1. **Add Password Reset UI** (1-2 hours)
-   - Critical for user retention
-   - Backend already exists
-   - Simple screen + navigation
+### Week 2: Important Gaps
+- [ ] Phone signup + OTP (backend + frontend)
+- [ ] Gender field with visibility toggle
+- [ ] Password reset UI
+- [ ] Filter UI on discovery screen
 
-2. **Enhance Error Messages** (1-2 days)
-   - Review all error states
-   - User-friendly messages
-   - Retry actions where appropriate
+### Week 3: Polish & Testing
+- [ ] Frontend tests (widget + integration)
+- [ ] Error message improvements
+- [ ] Accessibility pass
+- [ ] Loading states polish
 
-3. **Frontend Testing** (1-2 weeks)
-   - Widget tests for critical components
-   - Integration tests for key flows
-   - E2E scenarios
+### Week 4: Launch Prep
+- [ ] Production deployment
+- [ ] PostgreSQL migration
+- [ ] File storage (S3)
+- [ ] HTTPS configuration
 
-4. **Accessibility Pass** (3-5 days)
-   - Semantic labels
-   - Screen reader testing
-   - Contrast checking
-   - Font scaling
-
-### Nice-to-Have (Post-MVP)
-
-1. **Loading Skeletons** (3-5 hours)
-   - Shimmer effect on lists
-   - Better perceived performance
-
-2. **Advanced Animations** (2-3 days)
-   - Screen transitions
-   - Tab switches
-   - Button press feedback
-
-3. **Dedicated Preferences Screen** (2-3 hours)
-   - Extract from profile edit
-   - Better separation of concerns
-
-4. **WebSocket Chat** (1-2 weeks)
-   - Real-time messaging
-   - Typing indicators
-   - Online status
-
-### Launch Prep (2-4 weeks)
-
-1. **Production Deployment**
-   - Cloud hosting (Railway, Render, AWS)
-   - Managed PostgreSQL
-   - File storage (S3)
-   - HTTPS setup
-
-2. **App Store Preparation**
-   - Release builds
-   - Screenshots
-   - Store listing
-   - Privacy policy
-   - Terms of service
-
-3. **Beta Testing**
-   - TestFlight (iOS)
-   - Internal testing group
-   - Bug fixes from feedback
+### Week 5-6: Beta Testing
+- [ ] TestFlight / Internal testing
+- [ ] Bug fixes from feedback
+- [ ] Play Store listing prep
+- [ ] Privacy policy / Terms
 
 ---
 
 ## Conclusion
 
-**The Nexa MVP is 95% complete and feature-ready!**
+**Nexa v1 is 85% complete.**
 
-### ✅ What's Working Well
-- All core user journeys implemented
-- Backend thoroughly tested (45 tests)
-- Clean architecture (Service → Provider → Screen)
-- Consistent UX patterns
-- Comprehensive safety features
-- Full API integration
+The core functionality works:
+- ✅ Users can sign up, verify email, login
+- ✅ Users can create profiles with photos, bio, intents, interests
+- ✅ Users can discover people nearby
+- ✅ Users can send/receive connection requests
+- ✅ Users can chat with connections
+- ✅ Users can block/report for safety
 
-### ⚠️ What Needs Attention
-- Password reset UI
-- Error message improvements
-- Frontend testing (no automated tests)
-- Accessibility enhancements
-- Loading state polish
+**Key gaps before launch:**
+1. Location radius control (high priority)
+2. Pause/Delete account (high priority)
+3. Phone signup option (medium priority)
+4. Dedicated filter UI (medium priority)
 
-### 🚀 Ready for Launch After
-1. Frontend testing suite (1-2 weeks)
-2. Accessibility pass (3-5 days)
-3. Error message improvements (1-2 days)
-4. Password reset UI (1-2 hours)
-5. Production deployment setup (1-2 weeks)
-6. Beta testing period (2-4 weeks)
-
-**Estimated time to launch: 6-8 weeks**
-
-The foundation is solid. The features work. Now it's time to polish, test, and ship! 🎯
+**Estimated time to v1 launch: 4-6 weeks**
 
 ---
 
 **Last Updated**: December 30, 2025  
-**Prepared by**: GitHub Copilot  
-**Document**: Implementation Status Report
+**Document**: Implementation Status aligned with v1/v1.5 Roadmap
