@@ -10,7 +10,7 @@
 
 | Version | Status | Completion |
 |---------|--------|------------|
-| **v1 (Core)** | In Progress | 95% |
+| **v1 (Core)** | In Progress | 96% |
 | **v1.5 (Activities)** | Not Started | 0% |
 
 ---
@@ -106,14 +106,14 @@
 
 | Feature | Required | Backend | Frontend | Notes |
 |---------|----------|---------|----------|-------|
-| Distance filter | ✅ | ✅ Complete | ❌ Not built | **v1 Gap** - Need UI |
-| Intent filter | ✅ | ✅ Complete | ⚠️ Partial | In preferences |
+| Distance filter | ✅ | ✅ Complete | ✅ Complete | Filter sheet with radius chips |
+| Intent filter | ✅ | ✅ Complete | ✅ Complete | Filter by looking for |
 | Age range filter | ✅ | ✅ Complete | ⚠️ Partial | In preferences |
 | Interests filter | ✅ | ✅ Complete | ⚠️ Partial | In preferences |
-| Faith filter | ✅ Optional | ✅ Complete | ⚠️ Partial | In preferences |
+| Faith filter | ✅ Optional | ✅ Complete | ✅ Complete | Same faith option |
 | No black-box algorithm | ✅ | ✅ Complete | ✅ Complete | Transparent filtering |
 
-**Status**: 70% Complete (need dedicated filter UI)
+**Status**: 90% Complete
 
 ---
 
@@ -172,11 +172,11 @@
 | Location & Radius | 100% | ✅ Complete |
 | Faith & Values | 90% | Minor UI polish |
 | Discovery | 80% | List view (currently swipe cards) |
-| Filters | 70% | Dedicated filter UI |
+| Filters | 90% | Age/interests in preferences |
 | Connections | 100% | ✅ Complete |
 | Chat | 100% | ✅ Complete |
 | Safety | 100% | ✅ Complete |
-| **Overall v1** | **95%** | |
+| **Overall v1** | **96%** | |
 
 ---
 

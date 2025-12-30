@@ -4,6 +4,9 @@ import '../models/connection.dart';
 import '../services/discovery_service.dart';
 import 'service_providers.dart';
 
+// Re-export DiscoveryFilters for convenience
+export '../services/discovery_service.dart' show DiscoveryFilters;
+
 /// Discovery state
 class DiscoveryState {
   final List<DiscoveryProfile> profiles;
@@ -11,6 +14,7 @@ class DiscoveryState {
   final String? error;
   final bool hasMore;
   final Connection? newMatch;
+  final DiscoveryFilters filters;
 
   DiscoveryState({
     this.profiles = const [],
@@ -18,7 +22,8 @@ class DiscoveryState {
     this.error,
     this.hasMore = true,
     this.newMatch,
-  });
+    DiscoveryFilters? filters,
+  }) : filters = filters ?? DiscoveryFilters();
 
   DiscoveryState copyWith({
     List<DiscoveryProfile>? profiles,
@@ -27,6 +32,7 @@ class DiscoveryState {
     bool? hasMore,
     Connection? newMatch,
     bool clearNewMatch = false,
+    DiscoveryFilters? filters,
   }) {
     return DiscoveryState(
       profiles: profiles ?? this.profiles,
@@ -34,6 +40,7 @@ class DiscoveryState {
       error: error,
       hasMore: hasMore ?? this.hasMore,
       newMatch: clearNewMatch ? null : (newMatch ?? this.newMatch),
+      filters: filters ?? this.filters,
     );
   }
 }
@@ -51,7 +58,7 @@ class DiscoveryNotifier extends StateNotifier<DiscoveryState> {
     if (state.isLoading) return;
     
     if (refresh) {
-      state = DiscoveryState(isLoading: true);
+      state = DiscoveryState(isLoading: true, filters: state.filters);
     } else {
       state = state.copyWith(isLoading: true, error: null);
     }
@@ -60,6 +67,7 @@ class DiscoveryNotifier extends StateNotifier<DiscoveryState> {
       final profiles = await _discoveryService.getDiscovery(
         limit: 20,
         offset: refresh ? 0 : state.profiles.length,
+        filters: state.filters,
       );
 
       state = state.copyWith(
@@ -73,6 +81,18 @@ class DiscoveryNotifier extends StateNotifier<DiscoveryState> {
         error: e.toString(),
       );
     }
+  }
+
+  /// Apply filters and reload profiles
+  Future<void> applyFilters(DiscoveryFilters filters) async {
+    state = state.copyWith(filters: filters);
+    await loadProfiles(refresh: true);
+  }
+
+  /// Clear all filters
+  Future<void> clearFilters() async {
+    state = state.copyWith(filters: DiscoveryFilters());
+    await loadProfiles(refresh: true);
   }
 
   /// Express interest (like)

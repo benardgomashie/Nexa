@@ -7,6 +7,7 @@ import '../../providers/discovery_provider.dart';
 import '../../providers/chat_provider.dart';
 import '../../providers/connection_provider.dart';
 import '../../widgets/report_dialog.dart';
+import '../../widgets/discovery_filter_sheet.dart';
 
 /// Formats distance as approximate ranges (e.g., "~2km" instead of "2.3km")
 String _formatDistanceAsRange(double distanceKm) {
@@ -52,6 +53,29 @@ class DiscoveryScreen extends ConsumerWidget {
         title: const Text('Discover'),
         centerTitle: true,
         actions: [
+          // Filter button with badge if filters active
+          Stack(
+            children: [
+              IconButton(
+                icon: const Icon(Icons.tune),
+                onPressed: () => showDiscoveryFilterSheet(context, ref),
+                tooltip: 'Filter',
+              ),
+              if (discoveryState.filters.hasActiveFilters)
+                Positioned(
+                  right: 8,
+                  top: 8,
+                  child: Container(
+                    width: 8,
+                    height: 8,
+                    decoration: BoxDecoration(
+                      color: AppTheme.accentColor,
+                      shape: BoxShape.circle,
+                    ),
+                  ),
+                ),
+            ],
+          ),
           IconButton(
             icon: const Icon(Icons.refresh),
             onPressed: () => ref.read(discoveryProvider.notifier).refresh(),
