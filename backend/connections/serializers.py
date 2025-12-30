@@ -21,6 +21,7 @@ class ConnectionSerializer(serializers.ModelSerializer):
             "from_user_profile",
             "to_user_profile",
             "status",
+            "intro_message",
             "created_at",
             "updated_at",
             "accepted_at",
@@ -31,6 +32,7 @@ class ConnectionSerializer(serializers.ModelSerializer):
             "from_user",
             "from_user_profile",
             "to_user_profile",
+            "intro_message",
             "created_at",
             "updated_at",
             "accepted_at",
@@ -48,10 +50,16 @@ class ConnectionCreateSerializer(serializers.ModelSerializer):
     """Serializer for creating a new connection request."""
 
     to_user = serializers.IntegerField(help_text="ID of the user to connect with")
+    intro_message = serializers.CharField(
+        max_length=200,
+        required=False,
+        allow_blank=True,
+        help_text="Optional intro message (max 200 chars)",
+    )
 
     class Meta:
         model = Connection
-        fields = ("to_user",)
+        fields = ("to_user", "intro_message")
 
     def validate_to_user(self, value):
         """Validate the to_user field."""
@@ -90,6 +98,7 @@ class ConnectionCreateSerializer(serializers.ModelSerializer):
         User = get_user_model()
         request = self.context.get("request")
         to_user_id = validated_data["to_user"]
+        intro_message = validated_data.get("intro_message", "")
 
         to_user = User.objects.get(id=to_user_id)
 
@@ -97,6 +106,7 @@ class ConnectionCreateSerializer(serializers.ModelSerializer):
             from_user=request.user,
             to_user=to_user,
             status=Connection.Status.PENDING,
+            intro_message=intro_message,
         )
 
         return connection

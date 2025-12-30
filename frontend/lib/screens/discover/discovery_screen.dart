@@ -141,7 +141,7 @@ class DiscoveryScreen extends ConsumerWidget {
               child: index == 0
                   ? _ProfileCard(
                       profile: profile,
-                      onLike: () => ref.read(discoveryProvider.notifier).like(profile.userId),
+                      onLike: ({String? introMessage}) => ref.read(discoveryProvider.notifier).like(profile.userId, introMessage: introMessage),
                       onPass: () => ref.read(discoveryProvider.notifier).pass(profile.userId),
                     )
                   : Opacity(
@@ -202,7 +202,7 @@ class DiscoveryScreen extends ConsumerWidget {
 
 class _ProfileCard extends ConsumerStatefulWidget {
   final DiscoveryProfile profile;
-  final VoidCallback onLike;
+  final void Function({String? introMessage}) onLike;
   final VoidCallback onPass;
 
   const _ProfileCard({
@@ -218,6 +218,60 @@ class _ProfileCard extends ConsumerStatefulWidget {
 class _ProfileCardState extends ConsumerState<_ProfileCard> {
   Offset _dragOffset = Offset.zero;
   bool _isDragging = false;
+
+  /// Shows dialog to optionally add an intro message
+  Future<void> _showIntroMessageDialog() async {
+    final TextEditingController controller = TextEditingController();
+    
+    final result = await showDialog<String?>(
+      context: context,
+      builder: (context) => AlertDialog(
+        title: Text('Connect with ${widget.profile.profile.displayName ?? 'this person'}'),
+        content: Column(
+          mainAxisSize: MainAxisSize.min,
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            const Text(
+              'Add a message to make your connection request stand out! (Optional)',
+              style: TextStyle(fontSize: 14, color: Colors.grey),
+            ),
+            const SizedBox(height: 16),
+            TextField(
+              controller: controller,
+              maxLength: 200,
+              maxLines: 3,
+              decoration: InputDecoration(
+                hintText: 'Say something nice...',
+                border: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(12),
+                ),
+                counterText: '',
+              ),
+            ),
+          ],
+        ),
+        actions: [
+          TextButton(
+            onPressed: () => Navigator.pop(context, null), // Cancel
+            child: const Text('Cancel'),
+          ),
+          TextButton(
+            onPressed: () => Navigator.pop(context, ''), // Skip message
+            child: const Text('Skip'),
+          ),
+          ElevatedButton(
+            onPressed: () => Navigator.pop(context, controller.text),
+            child: const Text('Connect'),
+          ),
+        ],
+      ),
+    );
+    
+    // null = cancelled, empty string = skip (like without message), non-empty = with message
+    if (result != null) {
+      widget.onLike(introMessage: result.isNotEmpty ? result : null);
+    }
+  }
 
   void _showProfileMenu() {
     showModalBottomSheet(
@@ -309,6 +363,7 @@ class _ProfileCardState extends ConsumerState<_ProfileCard> {
         if (_dragOffset.dx.abs() > threshold) {
           // Swipe action
           if (_dragOffset.dx > 0) {
+            // Swipe right = like without message (quick action)
             widget.onLike();
           } else {
             widget.onPass();
@@ -416,9 +471,18 @@ class _ProfileCardState extends ConsumerState<_ProfileCard> {
                       backgroundColor: Colors.white,
                       child: Icon(Icons.close, color: AppTheme.error, size: 32),
                     ),
+                    // Connect with message button
+                    FloatingActionButton.small(
+                      heroTag: 'message',
+                      onPressed: _showIntroMessageDialog,
+                      backgroundColor: Colors.white,
+                      tooltip: 'Connect with message',
+                      child: Icon(Icons.chat_bubble_outline, color: AppTheme.primaryColor, size: 20),
+                    ),
+                    // Quick like button
                     FloatingActionButton(
                       heroTag: 'like',
-                      onPressed: widget.onLike,
+                      onPressed: () => widget.onLike(),
                       backgroundColor: AppTheme.accentColor,
                       child: const Icon(Icons.favorite, color: Colors.white, size: 32),
                     ),

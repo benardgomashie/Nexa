@@ -76,8 +76,8 @@ class DiscoveryNotifier extends StateNotifier<DiscoveryState> {
   }
 
   /// Express interest (like)
-  Future<void> like(int userId) async {
-    await _expressInterest(userId, 'like');
+  Future<void> like(int userId, {String? introMessage}) async {
+    await _expressInterest(userId, 'like', introMessage: introMessage);
   }
 
   /// Pass on a profile
@@ -85,7 +85,7 @@ class DiscoveryNotifier extends StateNotifier<DiscoveryState> {
     await _expressInterest(userId, 'pass');
   }
 
-  Future<void> _expressInterest(int userId, String action) async {
+  Future<void> _expressInterest(int userId, String action, {String? introMessage}) async {
     try {
       // Remove profile from list optimistically
       final updatedProfiles = state.profiles
@@ -98,6 +98,7 @@ class DiscoveryNotifier extends StateNotifier<DiscoveryState> {
       final connection = await _discoveryService.expressInterest(
         targetUserId: userId,
         action: action,
+        introMessage: introMessage,
       );
 
       // If mutual match, show notification

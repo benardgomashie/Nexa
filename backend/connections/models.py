@@ -38,6 +38,13 @@ class Connection(models.Model):
         default=Status.PENDING,
     )
     
+    # Optional intro message when sending connection request
+    intro_message = models.TextField(
+        max_length=200,
+        blank=True,
+        help_text="Optional intro message sent with connection request",
+    )
+    
     # Timestamps
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)

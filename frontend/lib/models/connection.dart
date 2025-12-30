@@ -6,6 +6,7 @@ class Connection {
   final int fromUserId;
   final int toUserId;
   final String status;
+  final String? introMessage;
   final DateTime createdAt;
   final DateTime? respondedAt;
   final Profile? otherUserProfile;
@@ -15,6 +16,7 @@ class Connection {
     required this.fromUserId,
     required this.toUserId,
     required this.status,
+    this.introMessage,
     required this.createdAt,
     this.respondedAt,
     this.otherUserProfile,
@@ -26,6 +28,7 @@ class Connection {
       fromUserId: json['from_user'] as int,
       toUserId: json['to_user'] as int,
       status: json['status'] as String,
+      introMessage: json['intro_message'] as String?,
       createdAt: DateTime.parse(json['created_at'] as String),
       respondedAt: json['responded_at'] != null
           ? DateTime.parse(json['responded_at'] as String)

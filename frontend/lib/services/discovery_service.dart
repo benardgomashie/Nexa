@@ -31,12 +31,15 @@ class DiscoveryService {
   Future<Connection?> expressInterest({
     required int targetUserId,
     required String action,
+    String? introMessage,
   }) async {
     final response = await _apiClient.post(
       '/matching/interest/',
       data: {
         'target_user_id': targetUserId,
         'action': action, // 'like' or 'pass'
+        if (introMessage != null && introMessage.isNotEmpty) 
+          'intro_message': introMessage,
       },
     );
 

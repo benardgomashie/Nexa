@@ -10,7 +10,7 @@
 
 | Version | Status | Completion |
 |---------|--------|------------|
-| **v1 (Core)** | In Progress | 94% |
+| **v1 (Core)** | In Progress | 95% |
 | **v1.5 (Activities)** | Not Started | 0% |
 
 ---
@@ -122,13 +122,13 @@
 | Feature | Required | Backend | Frontend | Notes |
 |---------|----------|---------|----------|-------|
 | "Connect" button | ✅ | ✅ Complete | ✅ Complete | |
-| Optional intro message | ✅ | ❌ Not built | ❌ Not built | **v1 Gap** |
+| Optional intro message | ✅ | ✅ Complete | ✅ Complete | Message button on discovery cards |
 | Mutual acceptance | ✅ | ✅ Complete | ✅ Complete | |
 | Pending states | ✅ | ✅ Complete | ✅ Complete | |
 | Accept/Decline | ✅ | ✅ Complete | ✅ Complete | |
 | Connections list | ✅ | ✅ Complete | ✅ Complete | 3-tab interface |
 
-**Status**: 90% Complete
+**Status**: 100% Complete
 
 ---
 
@@ -173,10 +173,10 @@
 | Faith & Values | 90% | Minor UI polish |
 | Discovery | 80% | List view (currently swipe cards) |
 | Filters | 70% | Dedicated filter UI |
-| Connections | 90% | Optional intro message |
+| Connections | 100% | ✅ Complete |
 | Chat | 100% | ✅ Complete |
 | Safety | 100% | ✅ Complete |
-| **Overall v1** | **94%** | |
+| **Overall v1** | **95%** | |
 
 ---
 
