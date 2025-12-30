@@ -10,7 +10,7 @@
 
 | Version | Status | Completion |
 |---------|--------|------------|
-| **v1 (Core)** | In Progress | 96% |
+| **v1 (Core)** | In Progress | 97% |
 | **v1.5 (Activities)** | Not Started | 0% |
 
 ---
@@ -49,11 +49,11 @@
 | Dating intent | ✅ | ✅ Complete | ✅ Complete | |
 | Networking intent | ✅ | ✅ Complete | ✅ Complete | |
 | Activity partner intent | ✅ | ✅ Complete | ✅ Complete | |
-| Open to connections | ✅ | ❌ Not built | ❌ Not built | Need to add |
-| Intent visible on profile | ✅ | ✅ Complete | ✅ Complete | |
-| Intent filterable | ✅ | ✅ Complete | ✅ Complete | |
+| Open to connections | ✅ | ✅ Complete | ✅ Complete | "Open to Anything" intent |
+| Intent visible on profile | ✅ | ✅ Complete | ✅ Complete | With icons |
+| Intent filterable | ✅ | ✅ Complete | ✅ Complete | In filter sheet |
 
-**Status**: 85% Complete
+**Status**: 100% Complete
 
 ---
 
@@ -93,7 +93,7 @@
 | Sort by shared intent | ✅ | ✅ Complete | ✅ Complete | |
 | Sort by shared interests | ✅ | ✅ Complete | ✅ Complete | |
 | Show: Name | ✅ | ✅ Complete | ✅ Complete | |
-| Show: Intent icons | ✅ | ✅ Complete | ⚠️ Text only | Should be icons |
+| Show: Intent icons | ✅ | ✅ Complete | ✅ Complete | Icons with text |
 | Show: Distance range | ✅ | ⚠️ Shows exact | ⚠️ Shows exact | Should be ranges |
 | Show: 2-3 interest tags | ✅ | ✅ Complete | ✅ Complete | |
 | Pagination | ✅ | ✅ Complete | ✅ Complete | |
@@ -168,7 +168,7 @@
 | Category | Completion | Priority Gaps |
 |----------|------------|---------------|
 | Account & Identity | 90% | Phone signup only |
-| Intent Selection | 85% | "Open to connections" option |
+| Intent Selection | 100% | ✅ Complete |
 | Location & Radius | 100% | ✅ Complete |
 | Faith & Values | 90% | Minor UI polish |
 | Discovery | 80% | List view (currently swipe cards) |
@@ -176,7 +176,7 @@
 | Connections | 100% | ✅ Complete |
 | Chat | 100% | ✅ Complete |
 | Safety | 100% | ✅ Complete |
-| **Overall v1** | **96%** | |
+| **Overall v1** | **97%** | |
 
 ---
 

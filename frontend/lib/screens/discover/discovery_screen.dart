@@ -34,6 +34,30 @@ String _formatDistanceAsRange(double distanceKm) {
   }
 }
 
+/// Returns an icon for the given intent tag
+IconData _getIntentIcon(String intent) {
+  switch (intent.toLowerCase()) {
+    case 'friendship':
+      return Icons.people;
+    case 'dating':
+      return Icons.favorite;
+    case 'networking':
+      return Icons.business_center;
+    case 'activity partners':
+      return Icons.sports_tennis;
+    case 'mentorship':
+      return Icons.school;
+    case 'study buddies':
+      return Icons.menu_book;
+    case 'skill exchange':
+      return Icons.swap_horiz;
+    case 'open to anything':
+      return Icons.all_inclusive;
+    default:
+      return Icons.tag;
+  }
+}
+
 class DiscoveryScreen extends ConsumerWidget {
   const DiscoveryScreen({super.key});
 
@@ -593,15 +617,22 @@ class _ProfileCardContent extends StatelessWidget {
                 ),
               const SizedBox(height: 12),
               
-              // Intent tags
+              // Intent tags with icons
               if (profile.profile.intentTags.isNotEmpty)
                 Wrap(
                   spacing: 8,
                   runSpacing: 8,
                   children: profile.profile.intentTags.take(3).map((tag) => Chip(
+                        avatar: Icon(
+                          _getIntentIcon(tag),
+                          color: Colors.white,
+                          size: 16,
+                        ),
                         label: Text(tag),
                         backgroundColor: AppTheme.primaryColor.withOpacity(0.8),
-                        labelStyle: const TextStyle(color: Colors.white),
+                        labelStyle: const TextStyle(color: Colors.white, fontSize: 12),
+                        padding: const EdgeInsets.symmetric(horizontal: 4),
+                        materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
                       )).toList(),
                 ),
             ],

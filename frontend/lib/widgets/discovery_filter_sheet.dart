@@ -3,12 +3,16 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../config/theme.dart';
 import '../providers/discovery_provider.dart';
 
-/// Available intent options
-const List<String> _intentOptions = [
-  'Friendship',
-  'Dating',
-  'Networking',
-  'Activity Partner',
+/// Available intent options with icons
+const List<Map<String, dynamic>> _intentOptions = [
+  {'name': 'Friendship', 'icon': Icons.people},
+  {'name': 'Dating', 'icon': Icons.favorite},
+  {'name': 'Networking', 'icon': Icons.business_center},
+  {'name': 'Activity Partners', 'icon': Icons.sports_tennis},
+  {'name': 'Mentorship', 'icon': Icons.school},
+  {'name': 'Study Buddies', 'icon': Icons.menu_book},
+  {'name': 'Skill Exchange', 'icon': Icons.swap_horiz},
+  {'name': 'Open to Anything', 'icon': Icons.all_inclusive},
 ];
 
 /// Discovery filter bottom sheet
@@ -130,13 +134,16 @@ class _DiscoveryFilterSheetState extends ConsumerState<DiscoveryFilterSheet> {
                 selectedColor: AppTheme.primaryColor.withOpacity(0.2),
               ),
               ..._intentOptions.map((intent) {
-                final isSelected = _selectedIntent == intent;
+                final name = intent['name'] as String;
+                final icon = intent['icon'] as IconData;
+                final isSelected = _selectedIntent == name;
                 return FilterChip(
-                  label: Text(intent),
+                  avatar: Icon(icon, size: 18),
+                  label: Text(name),
                   selected: isSelected,
                   onSelected: (selected) {
                     setState(() {
-                      _selectedIntent = selected ? intent : null;
+                      _selectedIntent = selected ? name : null;
                     });
                   },
                   selectedColor: AppTheme.primaryColor.withOpacity(0.2),
