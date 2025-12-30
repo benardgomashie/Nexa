@@ -28,6 +28,7 @@ urlpatterns = [
     path("api/v1/connections/", include("connections.urls", namespace="connections")),
     path("api/v1/chat/threads/", include("chat.urls", namespace="chat")),
     path("api/v1/reports/", include("moderation.urls", namespace="moderation")),
+    path("api/v1/activities/", include("activities.urls", namespace="activities")),
     path("api/health/", health_check, name="health-check"),
 ]
 

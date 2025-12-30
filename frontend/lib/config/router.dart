@@ -13,6 +13,10 @@ import '../screens/chat/chat_detail_screen.dart';
 import '../screens/settings/settings_screen.dart';
 import '../screens/settings/blocked_users_screen.dart';
 import '../screens/settings/discovery_settings_screen.dart';
+import '../screens/activities/activities_screen.dart';
+import '../screens/activities/create_activity_screen.dart';
+import '../screens/activities/activity_detail_screen.dart';
+import '../screens/activities/activity_chat_screen.dart';
 
 /// Router configuration with authentication guards
 final routerProvider = Provider<GoRouter>((ref) {
@@ -114,6 +118,30 @@ final routerProvider = Provider<GoRouter>((ref) {
       GoRoute(
         path: '/settings/discovery',
         builder: (context, state) => const DiscoverySettingsScreen(),
+      ),
+      
+      // Activity routes
+      GoRoute(
+        path: '/activities',
+        builder: (context, state) => const ActivitiesScreen(),
+      ),
+      GoRoute(
+        path: '/activities/create',
+        builder: (context, state) => const CreateActivityScreen(),
+      ),
+      GoRoute(
+        path: '/activities/:activityId',
+        builder: (context, state) {
+          final activityId = int.parse(state.pathParameters['activityId']!);
+          return ActivityDetailScreen(activityId: activityId);
+        },
+      ),
+      GoRoute(
+        path: '/activities/:activityId/chat',
+        builder: (context, state) {
+          final activityId = int.parse(state.pathParameters['activityId']!);
+          return ActivityChatScreen(activityId: activityId);
+        },
       ),
     ],
     errorBuilder: (context, state) => Scaffold(

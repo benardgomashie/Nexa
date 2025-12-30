@@ -5,6 +5,7 @@ import '../services/profile_service.dart';
 import '../services/discovery_service.dart';
 import '../services/connection_service.dart';
 import '../services/chat_service.dart';
+import '../services/activity_service.dart';
 
 /// API Client provider (singleton)
 final apiClientProvider = Provider<ApiClient>((ref) {
@@ -39,4 +40,10 @@ final connectionServiceProvider = Provider<ConnectionService>((ref) {
 final chatServiceProvider = Provider<ChatService>((ref) {
   final apiClient = ref.watch(apiClientProvider);
   return ChatService(apiClient);
+});
+
+/// Activity Service provider
+final activityServiceProvider = Provider<ActivityService>((ref) {
+  final apiClient = ref.watch(apiClientProvider);
+  return ActivityService(apiClient);
 });

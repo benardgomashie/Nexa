@@ -6,6 +6,7 @@ import '../providers/auth_provider.dart';
 import 'discover/discovery_screen.dart';
 import 'connections/connections_screen.dart';
 import 'chat/chat_list_screen.dart';
+import 'activities/activities_screen.dart';
 
 // Navigation state provider
 final selectedIndexProvider = StateProvider<int>((ref) => 0);
@@ -20,6 +21,7 @@ class HomeScreen extends ConsumerWidget {
     // Define pages
     final pages = [
       const DiscoveryScreen(),
+      const ActivitiesScreen(),
       const ConnectionsScreen(),
       const ChatListScreen(),
       const ProfilePage(),
@@ -37,6 +39,11 @@ class HomeScreen extends ConsumerWidget {
             icon: Icon(Icons.explore_outlined),
             selectedIcon: Icon(Icons.explore),
             label: 'Discover',
+          ),
+          NavigationDestination(
+            icon: Icon(Icons.event_outlined),
+            selectedIcon: Icon(Icons.event),
+            label: 'Activities',
           ),
           NavigationDestination(
             icon: Icon(Icons.favorite_border),

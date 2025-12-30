@@ -52,6 +52,7 @@ INSTALLED_APPS = [
     "connections",
     "chat",
     "moderation",
+    "activities",
 ]
 
 MIDDLEWARE = [

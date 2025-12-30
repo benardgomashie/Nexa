@@ -10,8 +10,8 @@
 
 | Version | Status | Completion |
 |---------|--------|------------|
-| **v1 (Core)** | In Progress | 97% |
-| **v1.5 (Activities)** | Not Started | 0% |
+| **v1 (Core)** | Complete | 97% |
+| **v1.5 (Activities)** | Complete | 100% |
 
 ---
 
@@ -223,22 +223,63 @@
 
 ---
 
-## Nexa v1.5 — Extension (Future)
+## Nexa v1.5 — Extension (Activities)
 
 > **Goal**: Help users **do things with people they already trust** (small, local, optional).
 
-### Status: Not Started (0%)
+### Status: ✅ Complete (100%)
 
 | Feature | Backend | Frontend | Notes |
 |---------|---------|----------|-------|
-| Activity model | ❌ | ❌ | Title, type, date, location, max people |
-| Activity creation | ❌ | ❌ | Host sets filters |
-| Activity discovery | ❌ | ❌ | Nearby activities |
-| Join request flow | ❌ | ❌ | Request → Approve → Join |
-| Activity chat | ❌ | ❌ | Group messaging |
-| Activity safety | ❌ | ❌ | Leave, report, limits |
+| Activity model | ✅ | ✅ | Title, description, date/time, location, max people |
+| Activity categories | ✅ | ✅ | 16 seeded categories (Sports, Coffee, Food, etc.) |
+| Activity creation | ✅ | ✅ | Host creates with filters, visibility options |
+| Activity discovery | ✅ | ✅ | Nearby activities tab, category filtering |
+| My hosted activities | ✅ | ✅ | Activities I created |
+| My joined activities | ✅ | ✅ | Activities I'm participating in |
+| Join request flow | ✅ | ✅ | Request → Host Approve/Decline → Join |
+| Participant management | ✅ | ✅ | Accept/decline requests, remove participants |
+| Activity chat | ✅ | ✅ | Group messaging for participants |
+| Activity detail view | ✅ | ✅ | Full info, participant list, action buttons |
+| Visibility controls | ✅ | ✅ | Public/Connections/Invite Only |
+| Leave activity | ✅ | ✅ | Participants can leave |
+| Cancel activity | ✅ | ✅ | Hosts can cancel |
 
-**v1.5 will be built AFTER v1 is stable and launched.**
+### Activity Categories (Seeded)
+
+1. Sports
+2. Coffee/Tea
+3. Food & Dining
+4. Outdoor/Hiking
+5. Fitness
+6. Gaming
+7. Study Group
+8. Music
+9. Movies
+10. Arts & Crafts
+11. Travel
+12. Pets
+13. Networking
+14. Social/Hangout
+15. Wellness/Yoga
+16. Volunteering
+
+### Technical Implementation
+
+**Backend (Django)**
+- App: `activities`
+- Models: `ActivityCategory`, `Activity`, `ActivityParticipant`, `ActivityChat`, `ActivityMessage`
+- Views: Full CRUD, join/leave, participant management, chat
+- Serializers: Nested serialization with distance calculation
+
+**Frontend (Flutter)**
+- Screens: `activities_screen.dart`, `create_activity_screen.dart`, `activity_detail_screen.dart`, `activity_chat_screen.dart`
+- Provider: `activity_provider.dart` (Riverpod state management)
+- Service: `activity_service.dart` (API client)
+- Models: `activity.dart` (Activity, ActivityDetail, CreateActivityRequest, etc.)
+- Navigation: 5-tab bottom nav with Activities tab
+
+**v1.5 is now complete and ready for testing.**
 
 ---
 
@@ -248,20 +289,20 @@
 
 | Metric | Count |
 |--------|-------|
-| Apps | 6 (accounts, profiles, connections, chat, moderation, matching) |
-| Models | 12 |
-| API Endpoints | 25+ |
+| Apps | 7 (accounts, profiles, connections, chat, moderation, matching, activities) |
+| Models | 17 |
+| API Endpoints | 35+ |
 | Tests | 45 (all passing) |
 
 ### Frontend (Flutter)
 
 | Metric | Count |
 |--------|-------|
-| Screens | 11 |
-| Services | 6 |
-| Providers | 5 |
-| Models | 6 |
-| Widgets | 2 (reusable) |
+| Screens | 15 |
+| Services | 7 |
+| Providers | 6 |
+| Models | 7 |
+| Widgets | 3 (reusable) |
 
 ---
 
