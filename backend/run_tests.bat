@@ -1,0 +1,3 @@
+@echo off
+echo Running Nexa Backend Tests...
+venv\Scripts\python.exe manage.py test --verbosity=2
