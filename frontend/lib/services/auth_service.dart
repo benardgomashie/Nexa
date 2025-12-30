@@ -205,6 +205,29 @@ class AuthService {
     return await _apiClient.isAuthenticated();
   }
   
+  /// Delete user account permanently
+  Future<Map<String, dynamic>> deleteAccount({String? password}) async {
+    try {
+      final response = await _apiClient.delete(
+        '/auth/delete-account/',
+        data: password != null ? {'password': password} : null,
+      );
+      
+      // Clear local tokens after successful deletion
+      await _apiClient.clearTokens();
+      
+      return {
+        'success': true,
+        'message': response.data['message'] ?? 'Account deleted successfully.',
+      };
+    } on DioException catch (e) {
+      return {
+        'success': false,
+        'error': _handleError(e),
+      };
+    }
+  }
+  
   /// Handle DioException and return user-friendly error message
   String _handleError(DioException e) {
     if (e.response != null) {

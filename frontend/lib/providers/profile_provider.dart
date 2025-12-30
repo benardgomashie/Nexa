@@ -222,10 +222,10 @@ class ProfileNotifier extends StateNotifier<ProfileState> {
 
   /// Update location preference
   Future<bool> updateLocationPreference({
-    required double latitude,
-    required double longitude,
+    double? latitude,
+    double? longitude,
     String? city,
-    required int radiusKm,
+    int? radiusKm,
   }) async {
     state = state.copyWith(isLoading: true, error: null);
     
@@ -248,6 +248,28 @@ class ProfileNotifier extends StateNotifier<ProfileState> {
         isLoading: false,
         error: e.toString(),
       );
+      return false;
+    }
+  }
+
+  /// Get combined preferences (location + matching)
+  Future<Map<String, dynamic>?> getPreferences() async {
+    try {
+      final response = await _profileService.getCombinedPreferences();
+      return response;
+    } catch (e) {
+      print('[PROFILE] Error getting preferences: $e');
+      return null;
+    }
+  }
+
+  /// Update visibility (show/hide in discovery)
+  Future<bool> updateVisibility(bool visible) async {
+    try {
+      await _profileService.updateVisibility(visible);
+      return true;
+    } catch (e) {
+      print('[PROFILE] Error updating visibility: $e');
       return false;
     }
   }

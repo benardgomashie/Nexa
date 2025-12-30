@@ -152,3 +152,28 @@ class LogoutView(APIView):
             return Response({"error": "Invalid or expired refresh token."}, status=status.HTTP_400_BAD_REQUEST)
 
         return Response({"message": "Logged out successfully."}, status=status.HTTP_205_RESET_CONTENT)
+
+
+class DeleteAccountView(APIView):
+    """Delete the authenticated user's account permanently."""
+    permission_classes = (IsAuthenticated,)
+
+    def delete(self, request):
+        user = request.user
+        
+        # Optional: Require password confirmation for extra security
+        password = request.data.get("password")
+        if password:
+            if not user.check_password(password):
+                return Response(
+                    {"error": "Incorrect password."},
+                    status=status.HTTP_400_BAD_REQUEST
+                )
+        
+        # Delete the user account
+        user.delete()
+        
+        return Response(
+            {"message": "Account deleted successfully."},
+            status=status.HTTP_200_OK
+        )

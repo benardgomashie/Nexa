@@ -130,22 +130,45 @@ class ProfileService {
 
   /// Update location preferences
   Future<LocationPreference> updateLocationPreference({
-    required double latitude,
-    required double longitude,
+    double? latitude,
+    double? longitude,
     String? city,
-    required int radiusKm,
+    int? radiusKm,
   }) async {
-    final response = await _apiClient.post(
-      '/me/location/',
-      data: {
-        'latitude': latitude,
-        'longitude': longitude,
-        if (city != null) 'city': city,
-        'radius_km': radiusKm,
-      },
+    final data = <String, dynamic>{};
+    if (latitude != null) data['latitude'] = latitude;
+    if (longitude != null) data['longitude'] = longitude;
+    if (city != null) data['city'] = city;
+    if (radiusKm != null) data['radius_km'] = radiusKm;
+
+    final response = await _apiClient.patch(
+      '/me/preferences/',
+      data: {'location': data},
     );
     
-    return LocationPreference.fromJson(response.data);
+    return LocationPreference.fromJson(response.data['location'] ?? response.data);
+  }
+
+  /// Get combined preferences (location + matching)
+  Future<Map<String, dynamic>> getCombinedPreferences() async {
+    final response = await _apiClient.get('/me/preferences/');
+    return {
+      'visible': response.data['matching']?['visible'] ?? true,
+      'radius_km': response.data['location']?['radius_km'] ?? 25,
+      'latitude': response.data['location']?['latitude'],
+      'longitude': response.data['location']?['longitude'],
+      'city': response.data['location']?['city'],
+    };
+  }
+
+  /// Update visibility (show/hide profile in discovery)
+  Future<void> updateVisibility(bool visible) async {
+    await _apiClient.patch(
+      '/me/preferences/',
+      data: {
+        'matching': {'visible': visible}
+      },
+    );
   }
 
   /// Get available tags

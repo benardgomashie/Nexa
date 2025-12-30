@@ -179,6 +179,22 @@ class AuthNotifier extends StateNotifier<AuthState> {
     await _authService.logout();
     state = AuthState(isAuthenticated: false);
   }
+  
+  /// Delete account permanently
+  Future<Map<String, dynamic>> deleteAccount({String? password}) async {
+    state = state.copyWith(isLoading: true, error: null);
+    
+    final result = await _authService.deleteAccount(password: password);
+    
+    if (result['success'] == true) {
+      // Reset state after deletion
+      state = AuthState(isAuthenticated: false);
+    } else {
+      state = state.copyWith(isLoading: false, error: result['error']);
+    }
+    
+    return result;
+  }
 
   /// Update profile in state
   void updateProfile(Profile profile) {

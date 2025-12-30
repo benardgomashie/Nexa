@@ -8,6 +8,31 @@ import '../../providers/chat_provider.dart';
 import '../../providers/connection_provider.dart';
 import '../../widgets/report_dialog.dart';
 
+/// Formats distance as approximate ranges (e.g., "~2km" instead of "2.3km")
+String _formatDistanceAsRange(double distanceKm) {
+  if (distanceKm < 1) {
+    return 'Less than 1km';
+  } else if (distanceKm < 2) {
+    return '~1km';
+  } else if (distanceKm < 3) {
+    return '~2km';
+  } else if (distanceKm < 5) {
+    return '~3km';
+  } else if (distanceKm < 10) {
+    return '~5km';
+  } else if (distanceKm < 15) {
+    return '~10km';
+  } else if (distanceKm < 25) {
+    return '~20km';
+  } else if (distanceKm < 50) {
+    return '~30km';
+  } else if (distanceKm < 100) {
+    return '~50km';
+  } else {
+    return '50km+';
+  }
+}
+
 class DiscoveryScreen extends ConsumerWidget {
   const DiscoveryScreen({super.key});
 
@@ -463,7 +488,7 @@ class _ProfileCardContent extends StatelessWidget {
                     const Icon(Icons.location_on, color: Colors.white, size: 16),
                     const SizedBox(width: 4),
                     Text(
-                      '${profile.distanceKm!.toStringAsFixed(1)} km away',
+                      '${_formatDistanceAsRange(profile.distanceKm!)} away',
                       style: AppTheme.bodyMedium.copyWith(color: Colors.white),
                     ),
                   ],

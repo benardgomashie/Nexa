@@ -11,6 +11,7 @@ import '../screens/profile/profile_edit_screen.dart';
 import '../screens/chat/chat_detail_screen.dart';
 import '../screens/settings/settings_screen.dart';
 import '../screens/settings/blocked_users_screen.dart';
+import '../screens/settings/discovery_settings_screen.dart';
 
 /// Router configuration with authentication guards
 final routerProvider = Provider<GoRouter>((ref) {
@@ -104,6 +105,10 @@ final routerProvider = Provider<GoRouter>((ref) {
       GoRoute(
         path: '/settings/blocked-users',
         builder: (context, state) => const BlockedUsersScreen(),
+      ),
+      GoRoute(
+        path: '/settings/discovery',
+        builder: (context, state) => const DiscoverySettingsScreen(),
       ),
     ],
     errorBuilder: (context, state) => Scaffold(
