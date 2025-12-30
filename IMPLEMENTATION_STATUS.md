@@ -10,7 +10,7 @@
 
 | Version | Status | Completion |
 |---------|--------|------------|
-| **v1 (Core)** | In Progress | 85% |
+| **v1 (Core)** | In Progress | 94% |
 | **v1.5 (Activities)** | Not Started | 0% |
 
 ---
@@ -30,14 +30,14 @@
 | Email verification | ✅ | ✅ Complete | ✅ Complete | Code-based |
 | Login/Logout | ✅ | ✅ Complete | ✅ Complete | JWT tokens |
 | Token refresh | ✅ | ✅ Complete | ✅ Complete | Auto-refresh |
-| Password reset | ✅ | ✅ Complete | ❌ Not built | Backend ready |
+| Password reset | ✅ | ✅ Complete | ✅ Complete | Full UI flow |
 | Profile: Name | ✅ | ✅ Complete | ✅ Complete | Display name |
 | Profile: Photos | ✅ | ✅ Complete | ✅ Complete | 1-3 photos |
 | Profile: Age | ✅ | ✅ Complete | ✅ Complete | Age buckets |
-| Profile: Gender | ✅ | ❌ Not built | ❌ Not built | **v1 Gap** - Optional visibility |
+| Profile: Gender | ✅ | ✅ Complete | ✅ Complete | Optional visibility toggle |
 | Profile: City/Area | ✅ | ⚠️ Partial | ⚠️ Partial | Has hometown, needs area |
 
-**Status**: 80% Complete
+**Status**: 90% Complete
 
 ---
 
@@ -62,12 +62,12 @@
 | Feature | Required | Backend | Frontend | Notes |
 |---------|----------|---------|----------|-------|
 | Auto-detect location | ✅ | ✅ Complete | ✅ Complete | GPS via geolocator |
-| User-defined radius | ✅ | ⚠️ Partial | ❌ Not built | **v1 Gap** - Need 1km/3km/5km/10km selector |
-| Distance as ranges | ✅ | ⚠️ Shows exact | ⚠️ Shows exact | **v1 Gap** - Should show "~2km" not "2.3km" |
-| Pause visibility | ✅ | ✅ Complete | ❌ Not built | **v1 Gap** - Backend has is_visible field |
+| User-defined radius | ✅ | ✅ Complete | ✅ Complete | 1/3/5/10/25/50km selector |
+| Distance as ranges | ✅ | ✅ Complete | ✅ Complete | Shows "~2km" not "2.3km" |
+| Pause visibility | ✅ | ✅ Complete | ✅ Complete | Toggle in Discovery Settings |
 | Distance calculation | ✅ | ✅ Complete | ✅ Complete | Haversine formula |
 
-**Status**: 60% Complete
+**Status**: 100% Complete
 
 ---
 
@@ -153,12 +153,13 @@
 | Block users | ✅ | ✅ Complete | ✅ Complete | |
 | Report users | ✅ | ✅ Complete | ✅ Complete | 7 reason categories |
 | Religious harassment report | ✅ | ✅ Complete | ✅ Complete | Included in reasons |
-| Pause account | ✅ | ✅ Complete | ❌ Not built | **v1 Gap** - is_visible toggle |
-| Delete account | ✅ | ❌ Not built | ❌ Not built | **v1 Gap** |
+| Pause account | ✅ | ✅ Complete | ✅ Complete | Toggle in Discovery Settings |
+| Delete account | ✅ | ✅ Complete | ✅ Complete | With confirmation dialog |
 | Blocked users list | ✅ | ✅ Complete | ✅ Complete | With unblock |
 | Admin moderation | ✅ | ✅ Complete | N/A | Django admin |
+| Log out | ✅ | ✅ Complete | ✅ Complete | In Settings |
 
-**Status**: 80% Complete
+**Status**: 100% Complete
 
 ---
 
@@ -166,16 +167,16 @@
 
 | Category | Completion | Priority Gaps |
 |----------|------------|---------------|
-| Account & Identity | 80% | Phone signup, Gender field |
+| Account & Identity | 90% | Phone signup only |
 | Intent Selection | 85% | "Open to connections" option |
-| Location & Radius | 60% | Radius selector, Pause visibility UI |
+| Location & Radius | 100% | ✅ Complete |
 | Faith & Values | 90% | Minor UI polish |
-| Discovery | 70% | List view (currently swipe cards) |
+| Discovery | 80% | List view (currently swipe cards) |
 | Filters | 70% | Dedicated filter UI |
 | Connections | 90% | Optional intro message |
 | Chat | 100% | ✅ Complete |
-| Safety | 80% | Pause/Delete account UI |
-| **Overall v1** | **85%** | |
+| Safety | 100% | ✅ Complete |
+| **Overall v1** | **94%** | |
 
 ---
 
@@ -197,20 +198,20 @@
 
 | Gap | Effort | Impact |
 |-----|--------|--------|
-| Location radius selector (1km/3km/5km/10km) | 4-6 hours | High - Core feature |
-| Pause visibility toggle | 2-3 hours | High - Privacy control |
-| Delete account | 4-6 hours | High - GDPR/User rights |
-| Distance shown as ranges | 2-3 hours | Medium - Privacy |
+| ~~Location radius selector~~ | ✅ Done | High - Core feature |
+| ~~Pause visibility toggle~~ | ✅ Done | High - Privacy control |
+| ~~Delete account~~ | ✅ Done | High - GDPR/User rights |
+| ~~Distance shown as ranges~~ | ✅ Done | Medium - Privacy |
 
 ### Medium Priority (Should Have)
 
 | Gap | Effort | Impact |
 |-----|--------|--------|
 | Phone signup + OTP | 1-2 days | Medium - Alternative auth |
-| Gender field with visibility | 3-4 hours | Medium - Profile completeness |
+| ~~Gender field with visibility~~ | ✅ Done | Medium - Profile completeness |
 | Filter UI on discovery | 4-6 hours | Medium - UX improvement |
 | Optional intro message | 3-4 hours | Medium - Better connections |
-| Password reset UI | 2-3 hours | Medium - User recovery |
+| ~~Password reset UI~~ | ✅ Done | Medium - User recovery |
 
 ### Low Priority (Nice to Have)
 
@@ -267,15 +268,15 @@
 ## Recommended v1 Launch Roadmap
 
 ### Week 1: Critical Gaps
-- [ ] Location radius selector UI
-- [ ] Pause visibility toggle UI
-- [ ] Delete account functionality
-- [ ] Distance shown as ranges
+- [x] Location radius selector UI ✅
+- [x] Pause visibility toggle UI ✅
+- [x] Delete account functionality ✅
+- [x] Distance shown as ranges ✅
 
 ### Week 2: Important Gaps
 - [ ] Phone signup + OTP (backend + frontend)
-- [ ] Gender field with visibility toggle
-- [ ] Password reset UI
+- [x] Gender field with visibility toggle ✅
+- [x] Password reset UI ✅
 - [ ] Filter UI on discovery screen
 
 ### Week 3: Polish & Testing
@@ -300,7 +301,7 @@
 
 ## Conclusion
 
-**Nexa v1 is 85% complete.**
+**Nexa v1 is 94% complete.**
 
 The core functionality works:
 - ✅ Users can sign up, verify email, login
@@ -311,10 +312,12 @@ The core functionality works:
 - ✅ Users can block/report for safety
 
 **Key gaps before launch:**
-1. Location radius control (high priority)
-2. Pause/Delete account (high priority)
-3. Phone signup option (medium priority)
-4. Dedicated filter UI (medium priority)
+1. ~~Location radius control~~ ✅ Complete
+2. ~~Pause/Delete account~~ ✅ Complete
+3. ~~Gender field with visibility~~ ✅ Complete
+4. ~~Password reset UI~~ ✅ Complete
+5. Phone signup option (medium priority)
+6. Dedicated filter UI (medium priority)
 
 **Estimated time to v1 launch: 4-6 weeks**
 

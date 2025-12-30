@@ -68,6 +68,8 @@ class ProfileSerializer(serializers.ModelSerializer):
             "display_name",
             "bio",
             "pronouns",
+            "gender",
+            "gender_visible",
             "age_bucket",
             "primary_language",
             "other_languages",

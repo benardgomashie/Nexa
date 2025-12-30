@@ -6,6 +6,7 @@ import '../screens/splash_screen.dart';
 import '../screens/auth/login_screen.dart';
 import '../screens/auth/register_screen.dart';
 import '../screens/auth/email_verification_screen.dart';
+import '../screens/auth/forgot_password_screen.dart';
 import '../screens/home_screen.dart';
 import '../screens/profile/profile_edit_screen.dart';
 import '../screens/chat/chat_detail_screen.dart';
@@ -80,6 +81,10 @@ final routerProvider = Provider<GoRouter>((ref) {
       GoRoute(
         path: '/auth/verify-email',
         builder: (context, state) => const EmailVerificationScreen(),
+      ),
+      GoRoute(
+        path: '/auth/forgot-password',
+        builder: (context, state) => const ForgotPasswordScreen(),
       ),
       
       // Main app routes

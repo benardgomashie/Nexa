@@ -54,6 +54,13 @@ class Profile(models.Model):
         OTHER = "other", "Other"
         PREFER_NOT_TO_SAY = "prefer_not_to_say", "Prefer not to say"
 
+    class Gender(models.TextChoices):
+        MALE = "male", "Male"
+        FEMALE = "female", "Female"
+        NON_BINARY = "non_binary", "Non-binary"
+        OTHER = "other", "Other"
+        PREFER_NOT_TO_SAY = "prefer_not_to_say", "Prefer not to say"
+
     user = models.OneToOneField(
         settings.AUTH_USER_MODEL,
         on_delete=models.CASCADE,
@@ -66,6 +73,12 @@ class Profile(models.Model):
         choices=Pronouns.choices,
         blank=True,
     )
+    gender = models.CharField(
+        max_length=20,
+        choices=Gender.choices,
+        blank=True,
+    )
+    gender_visible = models.BooleanField(default=False)
     age_bucket = models.CharField(
         max_length=10,
         choices=AgeBucket.choices,

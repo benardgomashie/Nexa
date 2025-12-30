@@ -5,6 +5,8 @@ class Profile {
   final String? displayName;
   final String? bio;
   final String? pronouns;
+  final String? gender;
+  final bool genderVisible;
   final String? ageBucket;
   final String primaryLanguage;
   final List<String> otherLanguages;
@@ -24,6 +26,8 @@ class Profile {
     this.displayName,
     this.bio,
     this.pronouns,
+    this.gender,
+    this.genderVisible = false,
     this.ageBucket,
     this.primaryLanguage = 'English',
     this.otherLanguages = const [],
@@ -61,6 +65,8 @@ class Profile {
       displayName: json['display_name'] as String?,
       bio: json['bio'] as String?,
       pronouns: json['pronouns'] as String?,
+      gender: json['gender'] as String?,
+      genderVisible: json['gender_visible'] as bool? ?? false,
       ageBucket: json['age_bucket'] as String?,
       primaryLanguage: json['primary_language'] as String? ?? 'English',
       otherLanguages: (json['other_languages'] as List<dynamic>?)
@@ -92,6 +98,8 @@ class Profile {
       'display_name': displayName,
       'bio': bio,
       'pronouns': pronouns,
+      'gender': gender,
+      'gender_visible': genderVisible,
       'age_bucket': ageBucket,
       'primary_language': primaryLanguage,
       'other_languages': otherLanguages,
@@ -122,6 +130,8 @@ class Profile {
     String? displayName,
     String? bio,
     String? pronouns,
+    String? gender,
+    bool? genderVisible,
     String? ageBucket,
     String? primaryLanguage,
     List<String>? otherLanguages,
@@ -141,6 +151,8 @@ class Profile {
       displayName: displayName ?? this.displayName,
       bio: bio ?? this.bio,
       pronouns: pronouns ?? this.pronouns,
+      gender: gender ?? this.gender,
+      genderVisible: genderVisible ?? this.genderVisible,
       ageBucket: ageBucket ?? this.ageBucket,
       primaryLanguage: primaryLanguage ?? this.primaryLanguage,
       otherLanguages: otherLanguages ?? this.otherLanguages,

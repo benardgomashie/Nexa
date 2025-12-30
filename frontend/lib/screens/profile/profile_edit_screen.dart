@@ -20,6 +20,8 @@ class _ProfileEditScreenState extends ConsumerState<ProfileEditScreen> {
   final _bioController = TextEditingController();
   
   String? _selectedPronouns;
+  String? _selectedGender;
+  bool _genderVisible = false;
   String? _selectedAgeBucket;
   String? _selectedFaith;
   final List<String> _selectedIntents = [];
@@ -53,6 +55,22 @@ class _ProfileEditScreenState extends ConsumerState<ProfileEditScreen> {
     'he_him': 'He/Him',
     'she_her': 'She/Her',
     'they_them': 'They/Them',
+    'other': 'Other',
+    'prefer_not_to_say': 'Prefer not to say',
+  };
+
+  final List<String> _genderOptions = [
+    'male',
+    'female',
+    'non_binary',
+    'other',
+    'prefer_not_to_say',
+  ];
+
+  final Map<String, String> _genderDisplayNames = {
+    'male': 'Male',
+    'female': 'Female',
+    'non_binary': 'Non-binary',
     'other': 'Other',
     'prefer_not_to_say': 'Prefer not to say',
   };
@@ -109,6 +127,8 @@ class _ProfileEditScreenState extends ConsumerState<ProfileEditScreen> {
       _displayNameController.text = profile.displayName ?? '';
       _bioController.text = profile.bio ?? '';
       _selectedPronouns = (profile.pronouns?.isEmpty ?? true) ? null : profile.pronouns;
+      _selectedGender = (profile.gender?.isEmpty ?? true) ? null : profile.gender;
+      _genderVisible = profile.genderVisible;
       _selectedAgeBucket = (profile.ageBucket?.isEmpty ?? true) ? null : profile.ageBucket;
       _selectedFaith = (profile.faith?.isEmpty ?? true) ? null : profile.faith;
       _selectedIntents.addAll(profile.intentTags);
@@ -169,6 +189,8 @@ class _ProfileEditScreenState extends ConsumerState<ProfileEditScreen> {
           displayName: _displayNameController.text.trim(),
           bio: _bioController.text.trim(),
           pronouns: _selectedPronouns,
+          gender: _selectedGender,
+          genderVisible: _genderVisible,
           ageBucket: _selectedAgeBucket,
           faith: _selectedFaith,
           intentTags: _selectedIntents,
@@ -376,6 +398,50 @@ class _ProfileEditScreenState extends ConsumerState<ProfileEditScreen> {
                         });
                       },
                     ),
+                    const SizedBox(height: 16),
+
+                    // Gender with visibility toggle
+                    DropdownButtonFormField<String>(
+                      value: _selectedGender,
+                      decoration: const InputDecoration(
+                        labelText: 'Gender (Optional)',
+                      ),
+                      items: _genderOptions
+                          .map((gender) => DropdownMenuItem(
+                                value: gender,
+                                child: Text(_genderDisplayNames[gender]!),
+                              ))
+                          .toList(),
+                      onChanged: (value) {
+                        setState(() {
+                          _selectedGender = value;
+                        });
+                      },
+                    ),
+                    if (_selectedGender != null && _selectedGender != 'prefer_not_to_say')
+                      Padding(
+                        padding: const EdgeInsets.only(top: 8),
+                        child: Row(
+                          children: [
+                            Checkbox(
+                              value: _genderVisible,
+                              onChanged: (value) {
+                                setState(() {
+                                  _genderVisible = value ?? false;
+                                });
+                              },
+                            ),
+                            Expanded(
+                              child: Text(
+                                'Show gender on my profile',
+                                style: AppTheme.bodyMedium.copyWith(
+                                  color: AppTheme.textSecondary,
+                                ),
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
                     const SizedBox(height: 16),
 
                     // Age bucket

@@ -27,6 +27,8 @@ class ProfileService {
     String? displayName,
     String? bio,
     String? pronouns,
+    String? gender,
+    bool? genderVisible,
     String? ageBucket,
     String? faith,
     double? latitude,
@@ -40,6 +42,8 @@ class ProfileService {
     if (displayName != null) data['display_name'] = displayName;
     if (bio != null) data['bio'] = bio;
     if (pronouns != null) data['pronouns'] = pronouns;
+    if (gender != null) data['gender'] = gender;
+    if (genderVisible != null) data['gender_visible'] = genderVisible;
     if (ageBucket != null) data['age_bucket'] = ageBucket;
     if (faith != null) data['faith'] = faith;
     if (latitude != null) data['latitude'] = latitude;

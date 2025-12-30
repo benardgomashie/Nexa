@@ -154,7 +154,7 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
                 // Forgot password
                 TextButton(
                   onPressed: () {
-                    // TODO: Navigate to password reset
+                    context.push('/auth/forgot-password');
                   },
                   child: const Text('Forgot password?'),
                 ),
