@@ -99,7 +99,7 @@ class _RegisterScreenState extends ConsumerState<RegisterScreen> {
                 ),
                 const SizedBox(height: 8),
                 Text(
-                  'Join Nexa and start connecting',
+                  'Join Norvi and start connecting',
                   style: AppTheme.bodyMedium,
                   textAlign: TextAlign.center,
                 ),

@@ -70,7 +70,7 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
                 
                 // Title
                 Text(
-                  'Welcome to Nexa',
+                  'Welcome to Norvi',
                   style: AppTheme.headline1,
                   textAlign: TextAlign.center,
                 ),

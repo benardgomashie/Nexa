@@ -1,15 +1,15 @@
-# Nexa
+# Norvi
 
 **Human connection, simplified.**
 
 > Version: 1.0.0-beta  
-> Status: v1 Core - 85% Complete
+> Status: v1 Core - 97% Complete
 
-Nexa is a mobile-first app that helps people **meet people near them**, safely and intentionally. It uses a Flutter frontend and a Django REST backend.
+Norvi is a mobile-first app that helps people **meet people near them**, safely and intentionally. It uses a Flutter frontend and a Django REST backend.
 
 ## Vision
 
-Open your phone and see the right people around you, on your terms. Nexa focuses on intentional connections — friendship, dating, networking, and activity partners — with user-controlled matching and cultural awareness.
+Open your phone and see the right people around you, on your terms. Norvi focuses on intentional connections — friendship, dating, networking, and activity partners — with user-controlled matching and cultural awareness.
 
 ## Tech Stack
 
@@ -24,7 +24,7 @@ Open your phone and see the right people around you, on your terms. Nexa focuses
 
 ---
 
-## Nexa v1 Features (Core Product)
+## Norvi v1 Features (Core Product)
 
 ### ✅ Implemented
 
@@ -85,7 +85,7 @@ Open your phone and see the right people around you, on your terms. Nexa focuses
 
 ---
 
-## Nexa v1.5 Features (Future)
+## Norvi v1.5 Features (Future)
 
 > **After v1 is stable**: Help users do things with people they already trust.
 
@@ -141,7 +141,7 @@ flutter run -d <device_id>
 ## Project Structure
 
 ```
-Nexa/
+Norvi/
 ├── README.md
 ├── IMPLEMENTATION_STATUS.md    # Detailed feature tracking
 ├── docs/

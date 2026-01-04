@@ -2,7 +2,7 @@ import 'package:dio/dio.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import '../config/app_config.dart';
 
-/// HTTP client for making API requests to the Nexa backend
+/// HTTP client for making API requests to the Norvi backend
 class ApiClient {
   late final Dio _dio;
   final FlutterSecureStorage storage = const FlutterSecureStorage();

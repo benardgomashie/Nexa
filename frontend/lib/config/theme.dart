@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-/// Nexa app theme and design system
+/// Norvi app theme and design system
 class AppTheme {
   // Brand Colors
   static const Color primaryColor = Color(0xFF6C63FF); // Purple

@@ -48,14 +48,14 @@ class SettingsScreen extends ConsumerWidget {
           _buildSectionHeader('About'),
           ListTile(
             leading: const Icon(Icons.info_outline),
-            title: const Text('About Nexa'),
+            title: const Text('About Norvi'),
             subtitle: const Text('Version 1.0.0'),
             onTap: () {
               showAboutDialog(
                 context: context,
-                applicationName: 'Nexa',
+                applicationName: 'Norvi',
                 applicationVersion: '1.0.0',
-                applicationLegalese: '© 2025 Nexa',
+                applicationLegalese: '© 2025 Norvi',
                 children: [
                   const SizedBox(height: 16),
                   const Text('Human connection, simplified.'),

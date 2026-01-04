@@ -24,7 +24,7 @@ class SplashScreen extends ConsumerWidget {
             
             // App name
             Text(
-              'Nexa',
+              'Norvi',
               style: AppTheme.headline1.copyWith(
                 color: Colors.white,
                 fontSize: 48,

@@ -15,13 +15,13 @@ def send_verification_email(user, request=None):
     uidb64 = urlsafe_base64_encode(force_bytes(user.pk))
 
     # For development, print to console
-    verification_url = f"nexa://verify-email?uidb64={uidb64}&token={token}"
+    verification_url = f"norvi://verify-email?uidb64={uidb64}&token={token}"
 
-    subject = "Verify your Nexa account"
+    subject = "Verify your Norvi account"
     message = f"""
 Hello {user.first_name or "there"},
 
-Welcome to Nexa! Please verify your email address by clicking the link below:
+Welcome to Norvi! Please verify your email address by clicking the link below:
 
 {verification_url}
 
@@ -29,10 +29,10 @@ Or use these values in the app:
 - uidb64: {uidb64}
 - token: {token}
 
-If you didn't create a Nexa account, you can ignore this email.
+If you didn't create a Norvi account, you can ignore this email.
 
 Best,
-The Nexa Team
+The Norvi Team
     """
 
     send_mail(
@@ -51,13 +51,13 @@ def send_password_reset_email(user):
     token = default_token_generator.make_token(user)
     uidb64 = urlsafe_base64_encode(force_bytes(user.pk))
 
-    reset_url = f"nexa://reset-password?uidb64={uidb64}&token={token}"
+    reset_url = f"norvi://reset-password?uidb64={uidb64}&token={token}"
 
-    subject = "Reset your Nexa password"
+    subject = "Reset your Norvi password"
     message = f"""
 Hello {user.first_name or "there"},
 
-You requested a password reset for your Nexa account. Click the link below:
+You requested a password reset for your Norvi account. Click the link below:
 
 {reset_url}
 
@@ -68,7 +68,7 @@ Or use these values in the app:
 If you didn't request this, you can ignore this email.
 
 Best,
-The Nexa Team
+The Norvi Team
     """
 
     send_mail(

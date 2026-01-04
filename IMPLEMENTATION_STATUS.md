@@ -1,7 +1,7 @@
-# Nexa Implementation Status
+# Norvi Implementation Status
 
-**Date**: December 30, 2025  
-**Project**: Nexa - Human Connection App  
+**Date**: January 4, 2026  
+**Project**: Norvi - Human Connection App  
 **Tagline**: Human connection, simplified.
 
 ---
@@ -15,7 +15,7 @@
 
 ---
 
-## Nexa v1 — Core Product (Launch Version)
+## Norvi v1 — Core Product (Launch Version)
 
 > **Goal**: Help users **meet people near them**, safely and intentionally (1-to-1).
 
@@ -223,7 +223,7 @@
 
 ---
 
-## Nexa v1.5 — Extension (Activities)
+## Norvi v1.5 — Extension (Activities)
 
 > **Goal**: Help users **do things with people they already trust** (small, local, optional).
 
@@ -342,7 +342,7 @@
 
 ## Conclusion
 
-**Nexa v1 is 94% complete.**
+**Norvi v1 is 97% complete.**
 
 The core functionality works:
 - ✅ Users can sign up, verify email, login
